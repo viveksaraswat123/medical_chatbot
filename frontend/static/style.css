@@ -140,3 +140,29 @@ body {
 #send-btn:hover {
     background-color: #0056b3;
 }
+
+.bot-message ul,
+.bot-message ol {
+  padding-left: 20px;
+  margin-left: 10px;
+}
+
+.bot-message li {
+  margin-bottom: 4px;
+}
+
+.bot-message strong {
+  font-weight: 600;
+}
+
+.bot-message {
+  white-space: normal;
+}
+.message ul, .message ol {
+    margin-left: 20px;
+    padding-left: 20px;
+}
+
+.message li {
+    margin-bottom: 4px;
+}

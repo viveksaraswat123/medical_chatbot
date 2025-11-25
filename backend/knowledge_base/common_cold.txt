@@ -1,0 +1,23 @@
+Title: Common Cold (Viral Rhinitis)
+Source: unknown
+Version: 2025-11-26
+Tags: ENT, infectious, supportive-care
+
+Overview:
+The common cold is an acute, self-limited viral infection of the upper respiratory tract (commonly rhinoviruses). Treatment is supportive.
+
+Typical symptoms:
+- Nasal congestion, rhinorrhea, sore throat, cough, sneezing, mild headache, low-grade fever, malaise.
+
+Self-care and symptomatic treatment:
+- Rest and fluids
+- Analgesics/antipyretics (e.g., acetaminophen/ibuprofen) for pain/fever (use per label and clinician advice)
+- Saline nasal irrigation and humidified air can provide symptom relief
+- Short-term (≤3 days) topical decongestant sprays may relieve congestion (avoid prolonged use)
+- Antibiotics are NOT effective unless there is bacterial superinfection confirmed by clinician
+
+When to see a clinician:
+- High fever (>38.5°C) >3 days, severe sore throat, shortness of breath, chest pain, persistent or worsening symptoms, or symptoms in high-risk patients (immunocompromised, elderly)
+
+Safety note:
+- Follow drug labels and consult a clinician for children, pregnant patients, or those with chronic diseases.

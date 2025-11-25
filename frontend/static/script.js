@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const addMessage = (text, sender) => {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', `${sender}-message`);
-        messageElement.textContent = text;
+        messageElement.innerHTML = marked.parse(text);
+
         chatBox.appendChild(messageElement);
         chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
     };

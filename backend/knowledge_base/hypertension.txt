@@ -1,0 +1,28 @@
+Title: Hypertension (High Blood Pressure)
+Source: unknown
+Version: 2025-11-26
+Tags: cardiology, chronic, prevention
+
+Overview:
+Hypertension is sustained elevation of arterial blood pressure; persistent uncontrolled hypertension increases risk of stroke, myocardial infarction, heart failure, and kidney disease.
+
+Key facts (short):
+- Many guidelines classify blood pressure categories—confirm current thresholds from local/national guidelines. (Example thresholds vary across guidelines; check your clinician's guideline source.)
+
+Symptoms:
+- Most people are asymptomatic. Possible nonspecific symptoms at very high levels include headache, visual changes, chest discomfort, or shortness of breath.
+
+Major risk factors:
+- Age, family history, overweight/obesity, high dietary sodium, physical inactivity, tobacco use, excessive alcohol.
+
+Management principles:
+- First-line: lifestyle modification (DASH-style eating, low sodium, regular aerobic exercise, weight control, limit alcohol).
+- Pharmacotherapy: thiazide diuretics, ACE inhibitors, ARBs, calcium channel blockers; choice individualized by comorbidities and contraindications.
+- Monitoring: home blood pressure monitoring recommended in many guidelines; regular clinical follow-up for medication adjustment.
+
+When to seek care:
+- If new symptoms such as chest pain, shortness of breath, syncope, or signs of hypertensive emergency (severe BP elevation with organ dysfunction) occur — seek emergency care.
+- Routine screening and follow-up with a primary care clinician are critical.
+
+Safety note:
+- Medication decisions and urgent management require a licensed provider. Do not stop or start medication without clinician guidance.

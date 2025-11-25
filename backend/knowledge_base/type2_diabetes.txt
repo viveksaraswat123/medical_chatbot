@@ -1,0 +1,36 @@
+Title: Type 2 Diabetes
+Source: unknown
+Version: 2025-11-26
+Tags: endocrine, diabetes, chronic, metabolic
+
+Overview:
+Type 2 diabetes is a chronic metabolic disorder resulting from insulin resistance and/or inadequate insulin production, causing persistent hyperglycaemia.
+
+Key facts (short):
+- Pathophysiology: peripheral insulin resistance + impaired β-cell insulin secretion → high blood glucose.
+- Typical diagnostic thresholds (for clinical reference only): Fasting plasma glucose ≥ 126 mg/dL, HbA1c ≥ 6.5% (confirm per guidelines). Always confirm with a clinician or guideline source.
+
+Common symptoms:
+- Polydipsia (increased thirst), polyuria (frequent urination), polyphagia (increased hunger)
+- Unintended weight loss, fatigue, blurred vision
+- Recurrent infections, slow wound healing, distal sensory neuropathy (tingling/numbness)
+
+Major risk factors:
+- Overweight/obesity (central adiposity)
+- Physical inactivity
+- Family history of diabetes
+- Age >45 years, certain ethnicities
+- Hypertension and atherogenic dyslipidemia
+
+Principles of management (general guidance):
+- Lifestyle: individualized medical nutrition therapy, reduce refined carbohydrates, weight loss, and ≥150 minutes/week moderate activity where safe.
+- Monitoring: home/self blood glucose or continuous monitoring per clinician's plan; regular HbA1c monitoring as advised by provider.
+- Pharmacotherapy: first-line agents often include metformin (unless contraindicated); many other classes exist (SGLT2 inhibitors, GLP-1 receptor agonists, insulin etc.) — medication selection and dosing must be decided by licensed clinicians.
+- Complication prevention: blood pressure and lipid control, annual foot and eye checks as indicated.
+
+When to seek medical care:
+- New onset of classic symptoms, very high glucose readings, dehydration, ketonuria, or any signs of diabetic ketoacidosis.
+- Urgent/Emergency: severe dehydration, altered mental status, rapid breathing — call emergency services.
+
+Safety note (MUST be included with any answer):
+- This text is informational only. Do not use this content as medical advice. For diagnosis, treatment, or medication changes, consult a qualified healthcare professional.
