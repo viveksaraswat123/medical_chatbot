@@ -1,0 +1,146 @@
+# ======================================================================
+# MEDIBOT AI ASSISTANT KNOWLEDGE BASE
+# MASTER DOCUMENT
+# IMPORTANT: The information herein is for informational purposes only and
+# is not a substitute for professional medical advice, diagnosis, or
+# treatment. Always seek the advice of your physician or other qualified
+# health provider with any questions you may have regarding a medical condition.
+# ======================================================================
+
+## Type 2 Diabetes
+
+### Overview
+Type 2 diabetes is a chronic condition that affects the way the body processes blood sugar (glucose). The body either doesn't produce enough insulin, or it resists insulin. Insulin is a hormone that regulates the movement of sugar into your cells.
+
+### Common Symptoms
+Symptoms of Type 2 diabetes often develop slowly. Look for:
+- Increased thirst
+- Frequent urination
+- Increased hunger
+- Unintended weight loss
+- Fatigue
+- Blurred vision
+- Slow-healing sores
+- Frequent infections
+- Numbness or tingling in the hands or feet
+
+### Primary Causes and Risk Factors
+- **Weight:** Being overweight or obese is a main risk factor.
+- **Inactivity:** Lack of physical activity.
+- **Family History:** Having a parent or sibling with Type 2 diabetes.
+- **Age:** Risk increases as you get older, especially after age 45.
+- **High Blood Pressure:** Blood pressure over 140/90 mmHg is linked to an increased risk.
+- **Abnormal Cholesterol:** Low levels of "good" cholesterol (HDL) and high levels of triglycerides.
+
+### Treatment Approaches
+Management of Type 2 diabetes includes:
+- **Healthy Eating:** A balanced diet low in refined carbohydrates and saturated fats.
+- **Regular Exercise:** Aiming for at least 150 minutes of moderate-intensity aerobic activity a week.
+- **Medication:** A doctor may prescribe oral medications like Metformin to lower glucose production.
+- **Insulin Therapy:** Some people may eventually need insulin injections.
+- **Blood Sugar Monitoring:** Regularly checking glucose levels is crucial.
+**Action:** All treatment plans must be created and monitored by a qualified healthcare provider.
+
+### When to See a Doctor
+Consult a doctor if you notice any of the common symptoms, such as increased thirst and frequent urination. Early detection and treatment can help prevent serious complications.
+
+---
+
+## Hypertension (High Blood Pressure)
+
+### Overview
+Hypertension, or high blood pressure, is a common condition in which the long-term force of the blood against your artery walls is high enough that it may eventually cause health problems, such as heart disease. Blood pressure is determined both by the amount of blood your heart pumps and the amount of resistance to blood flow in your arteries.
+
+### Common Symptoms
+Hypertension is often called the "silent killer" because most people with high blood pressure have no signs or symptoms, even if blood pressure readings reach dangerously high levels. A few people may experience:
+- Headaches
+- Shortness of breath
+- Nosebleeds
+These signs aren't specific and usually don't occur until high blood pressure has reached a severe stage.
+
+### Primary Causes and Risk Factors
+- **Age:** The risk of high blood pressure increases with age.
+- **Family History:** It tends to run in families.
+- **Being Overweight or Obese:** More weight means more blood is needed to supply oxygen and nutrients to your tissues, increasing pressure.
+- **High Sodium (Salt) Diet:** Too much sodium can cause your body to retain fluid, which increases blood pressure.
+- **Lack of Physical Activity:** Inactivity can lead to weight gain and higher heart rates.
+- **Tobacco Use:** Smoking or chewing tobacco immediately raises your blood pressure temporarily and can damage the lining of your artery walls.
+- **Excessive Alcohol Consumption:** Drinking too much alcohol can damage your heart.
+
+### Treatment Approaches
+- **Lifestyle Changes:** The first line of defense is a heart-healthy diet (like the DASH diet), regular physical activity, maintaining a healthy weight, and limiting alcohol.
+- **Medications:** A doctor may prescribe medications such as:
+  - Thiazide diuretics
+  - ACE inhibitors
+  - Angiotensin II receptor blockers (ARBs)
+  - Calcium channel blockers
+**Action:** Never start or stop medication without consulting a doctor.
+
+### When to See a Doctor
+It is recommended to get your blood pressure checked regularly as part of a routine doctor's visit. If you are diagnosed with high blood pressure, regular follow-ups are essential to manage the condition.
+
+---
+
+## Common Cold (Viral Rhinitis)
+
+### Overview
+The common cold is a mild viral infection of the nose and throat. It is most often caused by rhinoviruses. Colds are highly contagious and spread through droplets in the air when someone who is sick coughs, sneezes, or talks.
+
+### Common Symptoms
+- Runny or stuffy nose
+- Sore throat
+- Cough
+- Congestion
+- Slight body aches or a mild headache
+- Sneezing
+- Low-grade fever
+- Generally feeling unwell (malaise)
+
+### Treatment Approaches
+There is no cure for the common cold. Antibiotics are not effective against cold viruses. Treatment is focused on relieving signs and symptoms:
+- **Rest:** Get plenty of sleep.
+- **Hydration:** Drink plenty of fluids like water, juice, and clear broth.
+- **Symptom Relief:** Over-the-counter medications can help:
+  - Pain relievers like acetaminophen or ibuprofen can ease aches and fever.
+  - Decongestant nasal sprays can help with stuffiness.
+  - Cough syrups can soothe a cough.
+**Action:** Always read and follow the labels on over-the-counter products. Consult a pharmacist or doctor if you have questions.
+
+### When to See a Doctor
+For an adult, see a doctor if you have:
+- A fever higher than 101.3 F (38.5 C) that lasts more than three days.
+- Shortness of breath.
+- Severe sore throat, headache, or sinus pain.
+- Symptoms that worsen or fail to improve.
+
+---
+
+## EMERGENCY SITUATION: Signs of a Heart Attack
+
+### Overview
+A heart attack (myocardial infarction) occurs when the flow of blood to the heart is severely reduced or blocked. This is a life-threatening medical emergency.
+
+### Key Symptoms
+- **Chest Pain/Discomfort:** Pressure, squeezing, fullness, or pain in the center of your chest that lasts more than a few minutes or goes away and comes back.
+- **Discomfort in other areas of the upper body:** Pain or discomfort in one or both arms, the back, neck, jaw, or stomach.
+- **Shortness of breath:** May occur with or without chest discomfort.
+- **Other signs:** Breaking out in a cold sweat, nausea, or lightheadedness.
+
+### IMMEDIATE ACTION REQUIRED
+If you or someone else experiences these symptoms, **CALL YOUR LOCAL EMERGENCY SERVICES (e.g., 911, 112, 999) IMMEDIATELY.** Do not wait. Do not attempt to drive to the hospital yourself.
+
+---
+
+## EMERGENCY SITUATION: Signs of a Stroke
+
+### Overview
+A stroke occurs when the blood supply to part of your brain is interrupted or reduced, preventing brain tissue from getting oxygen and nutrients. Brain cells begin to die in minutes. A stroke is a medical emergency.
+
+### Key Symptoms (Use the F.A.S.T. acronym)
+- **F - Face Drooping:** Does one side of the face droop or is it numb? Ask the person to smile. Is the smile uneven?
+- **A - Arm Weakness:** Is one arm weak or numb? Ask the person to raise both arms. Does one arm drift downward?
+- **S - Speech Difficulty:** Is speech slurred? Is the person unable to speak or hard to understand? Ask the person to repeat a simple sentence.
+- **T - Time to Call Emergency Services:** If you see any of these signs, even if the symptoms go away, call your local emergency services immediately and get the person to a hospital.
+
+### IMMEDIATE ACTION REQUIRED
+If you suspect someone is having a stroke, **CALL YOUR LOCAL EMERGENCY SERVICES (e.g., 911, 112, 999) IMMEDIATELY.** Note the time when the first symptoms appeared.

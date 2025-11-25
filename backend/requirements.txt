@@ -1,0 +1,9 @@
+openai
+python-dotenv
+langchain
+langchain-openai
+faiss-cpu
+tiktoken
+fastapi
+uvicorn[standard]
+python-multipart
