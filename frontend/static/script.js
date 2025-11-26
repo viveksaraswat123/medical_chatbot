@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let conversationId = null;
     // Allow overriding API base URL from the page (useful in deployments).
     // Defaults to a relative path so the frontend can be served from the same origin as the API.
-    const API_BASE_URL = window.__API_BASE__ || '/api';
+    // const API_BASE_URL = window.__API_BASE__ || '/api';
+    const API_BASE_URL = "https://nonshrinkable-sumiko-unapprehendably.ngrok-free.dev/api";
+
 
     // Disable UI until conversation is ready
     sendBtn.disabled = true;

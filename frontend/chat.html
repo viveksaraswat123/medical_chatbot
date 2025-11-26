@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MediBot Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<style>
+    /* Better bubbles */
+    #messages > div {
+        margin-bottom: 12px;
+    }
+</style>
+
+<body class="h-screen bg-gray-100 flex overflow-hidden">
+    <!-- ======================= LEFT SIDEBAR ======================= -->
+    <div class="w-72 bg-gray-900 text-white flex flex-col shadow-xl">
+        <div class="p-5 border-b border-gray-700 flex justify-between items-center">
+            <h2 class="text-lg font-semibold">Your Chats</h2>
+            <button onclick="logout()" class="text-red-400 hover:text-red-300 text-xs">Logout</button>
+        </div>
+
+        <button onclick="createNewChat()" class="m-3 w-fit bg-blue-600 hover:bg-blue-700 p-2 rounded text-sm font-semibold transition">
+            + New Chat
+        </button>
+
+        <div id="chatList" class="px-3 flex-1 overflow-y-auto space-y-1"></div>
+    </div>
+
+    <!-- ======================= CHAT WINDOW ======================= -->
+    <div class="flex-1 flex flex-col bg-white">
+        <!-- HEADER -->
+        <header class="p-4 bg-blue-600 text-white shadow flex justify-between items-center">
+            <div>
+                <h2 class="text-xl font-semibold">Medical ChatBot</h2>
+                <p class="opacity-80 text-sm">Medical AI Assistant</p>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <!-- CHAT ID -->
+                <p id="currentChatID" class="text-sm bg-blue-800 px-3 py-1 rounded-lg"></p>
+                <button onclick="deleteChat()" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white">🗑️</button>
+
+            </div>
+        </header>
+
+        <!-- MESSAGE PANEL -->
+        <div id="messages" class="flex-1 px-6 py-4 space-y-3 overflow-y-auto bg-gradient-to-b from-blue-50 to-white"></div>
+
+        <!-- INPUT FIELD -->
+        <div class="p-4 border-t bg-white flex gap-3">
+            <input id="msgInput" type="text" placeholder="Ask anything medical..." class="flex-1 p-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" onkeydown="if(event.key==='Enter') sendMessage()">
+
+            <!-- Microphone Button -->
+            <button id="micBtn" onclick="toggleRecording()" class="bg-gray-700 hover:bg-gray-900 text-white px-4 rounded">🎤</button>
+
+            <button onclick="sendMessage()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-xl font-semibold shadow">Send ➤</button>
+            <button onclick="clearChat()" class="bg-red-500 hover:bg-red-600 text-white px-4 rounded-lg font-semibold">Clear</button>
+        </div>
+    </div>
+
+   <script>
+const API="https://nonshrinkable-sumiko-unapprehendably.ngrok-free.dev/api";
+let token=localStorage.getItem("token");
+let user_id=localStorage.getItem("user_id");
+let conversation_id=null;
+
+if(!token||!user_id) window.location.href="/";
+
+/* Load chat list */
+/* Load chat list with delete buttons */
+async function loadChats() {
+    const res = await fetch(`${API}/chat_list`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    let list = await res.json();
+    chatList.innerHTML = "";
+
+    list.forEach(chat => {
+        // wrapper div for chat item
+        let item = document.createElement("div");
+        item.className = "flex justify-between items-center w-full bg-gray-800 hover:bg-gray-700 p-2 rounded";
+
+        // chat button (click to open)
+        let b = document.createElement("button");
+        b.className = "text-left flex-1 truncate"; // truncate if long
+        b.textContent = chat.chat_id;             // full chat_id
+        b.onclick = () => openChat(chat.chat_id);
+
+        // delete button
+        let del = document.createElement("button");
+        del.className = "ml-2 bg-red-600 hover:bg-red-700 px-2 py-1 rounded text-white text-xs";
+        del.textContent = "🗑️";
+        del.onclick = async (e) => {
+            e.stopPropagation(); // prevent opening chat
+            if (!confirm("Delete this chat permanently?")) return;
+
+            await fetch(`${API}/delete_chat/${chat.chat_id}`, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            // remove from UI
+            item.remove();
+
+            // clear chat panel if current chat deleted
+            if (conversation_id === chat.chat_id) {
+                messages.innerHTML = "";
+                currentChatID.textContent = "";
+                conversation_id = null;
+            }
+        };
+
+        item.appendChild(b);
+        item.appendChild(del);
+        chatList.appendChild(item);
+    });
+}
+
+
+/* Create new chat */
+async function createNewChat(){
+    const r=await fetch(`${API}/new_chat`,{
+        method:"POST",
+        headers:{Authorization:`Bearer ${token}`}
+    });
+    const d=await r.json();
+    conversation_id=d.chat_id;
+    messages.innerHTML="";
+    currentChatID.textContent = "Chat: " + conversation_id; 
+
+    loadChats();
+}
+
+/* Delete chat */
+async function deleteChat(){
+    if(!conversation_id) return alert("No chat selected");
+
+    if(!confirm("Delete this chat permanently?")) return;
+
+    const res = await fetch(`${API}/delete_chat/${conversation_id}`,{
+        method:"DELETE",
+        headers:{ Authorization:`Bearer ${token}` }
+    });
+
+    if(res.ok){
+        alert("Chat Deleted!");
+        conversation_id = null;
+        messages.innerHTML = "";
+        currentChatID.textContent = "";
+        loadChats();  // refresh sidebar
+    }
+}
+
+
+/* Fetch chat history */
+async function openChat(id){
+    conversation_id=id;
+    currentChatID.textContent="Chat: "+id.slice(0,12);
+
+    const res=await fetch(`${API}/chat_history/${id}`,{
+        headers:{Authorization:`Bearer ${token}`}
+    });
+    let chat=await res.json();
+
+    messages.innerHTML="";
+    const msgs = chat.messages || [];  
+
+    msgs.forEach(m => {
+    let role = m.role || m.sender;
+    let text = m.content || m.text || "";
+    appendMsg(role, text, false);
+});
+
+    scrollMessages();
+}
+
+/* Send message */
+async function sendMessage(){
+    if(!conversation_id) await createNewChat();
+
+    let msg=msgInput.value.trim();
+    if(!msg) return;
+
+    appendMsg("user",msg,true);
+    msgInput.value="";
+    showTyping();
+
+    const r=await fetch(`${API}/chat`,{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json",
+            Authorization:`Bearer ${token}`
+        },
+        body:JSON.stringify({conversation_id,message:msg})
+    });
+
+    hideTyping();
+    const d=await r.json();
+    appendMsg("assistant",d.response);
+    loadChats();
+}
+
+/* UI helpers */
+function appendMsg(role,text,animate=true){
+    const msg=document.createElement("div");
+    msg.className=`flex ${role==="user"?"justify-end":""} ${animate?"animate-fade":""}`;
+    let b=document.createElement("div");
+    b.className=`p-3 max-w-xl rounded-xl shadow-md ${role==="user"?"bg-blue-600 text-white":"bg-white border"}`;
+    b.innerHTML=marked.parse(text);
+    msg.appendChild(b);
+    messages.appendChild(msg);
+    scrollMessages();
+}
+
+function clearChat(){ messages.innerHTML=""; }
+function scrollMessages(){ setTimeout(()=>messages.scrollTop=messages.scrollHeight,80); }
+function showTyping(){ let t=document.createElement("div");t.id="typeBubble";t.className="p-2 bg-white border rounded-xl w-fit";t.innerHTML="...";messages.appendChild(t); }
+function hideTyping(){ let t=document.getElementById("typeBubble"); if(t) t.remove(); }
+
+function logout(){ localStorage.clear(); window.location.href="/"; }
+
+/* Speech Recognition */
+let recognition;
+let isRecording=false;
+
+function initSpeech(){
+    if(!("webkitSpeechRecognition" in window)){
+        alert("Browser doesn't support voice input.");
+        return;
+    }
+    recognition=new webkitSpeechRecognition();
+    recognition.lang="en-US";
+    recognition.onstart=()=>{isRecording=true;micBtn.classList.add("bg-green-600");};
+    recognition.onend=()=>{isRecording=false;micBtn.classList.remove("bg-green-600");};
+    recognition.onresult=e=>{msgInput.value=e.results[0][0].transcript;};
+}
+
+function toggleRecording(){
+    if(!recognition) initSpeech();
+    isRecording?recognition.stop():recognition.start();
+}
+
+loadChats();
+</script>
+
+</body>
+</html>

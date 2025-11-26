@@ -1,0 +1,251 @@
+2025-11-26 12:21:18 | INFO    | medibot | New chat created 1217309c-b957-4c3b-b90f-67ac67ea06b3 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 12:26:08 | INFO    | medibot | New chat created ab92eb0d-b6d6-4223-bc33-dec3ba64e2fa for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 12:26:17 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 12:26:20 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 12:26:20 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 12:26:20 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 12:26:20 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 12:26:20 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:26:20 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:26:30 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 12:26:30 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 12:26:30 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:26:30 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:26:39 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 12:26:46 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:26:46 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:26:53 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 12:32:09 | INFO    | medibot | New chat created 66be5dae-5ba7-4dfe-ae3d-568276832d3b for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 12:33:37 | INFO    | medibot | New chat created 7a10f7f6-d517-4fab-ac3d-6d3be986c95a for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 12:33:45 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:33:45 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:33:58 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 12:35:42 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:35:42 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:35:48 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 12:36:32 | INFO    | medibot | New chat created d29c7003-9461-438f-8bde-a25a9873eee8 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 12:36:36 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:36:36 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:36:43 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 12:42:58 | INFO    | medibot | New chat created 592df7de-6028-4089-b487-808a33aaa5a7 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 12:43:05 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:43:05 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:43:13 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 12:43:13 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 12:43:24 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 12:45:40 | INFO    | medibot | New chat created bc365c86-dedc-4a64-aeb6-efeb405aa338 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 12:45:45 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:45:45 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:45:53 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 12:46:04 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:46:04 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:46:12 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 12:50:11 | INFO    | medibot | New chat created ab28e5ae-dff7-44c7-bc74-cee11a68ba3c for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 12:50:14 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:50:14 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:50:22 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 12:50:22 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 12:50:24 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 12:51:04 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:51:04 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:51:11 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 12:57:12 | INFO    | medibot | New chat created 8e1182c3-13fc-4c25-93b4-fa41eee7a107 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 12:57:21 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:57:21 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:57:30 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 12:58:11 | INFO    | medibot | New chat created b96198ef-758d-4570-894d-ab64c713191f for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 12:58:12 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:58:12 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:58:19 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 12:59:17 | INFO    | medibot | New chat created db6745ae-cf67-436a-b557-077b1a80082b for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 12:59:17 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 12:59:17 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 12:59:25 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:01:49 | INFO    | medibot | New chat created 20f98699-059e-4431-b22f-dc48bef3d076 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 13:01:49 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:01:49 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:01:57 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:03:18 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:03:18 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:03:26 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:06:42 | INFO    | medibot | New chat created 2553b3b7-169a-42f5-9b96-8ea86688d3f2 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 13:06:42 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:06:42 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:06:50 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:08:07 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:08:07 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:08:15 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:08:20 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:08:20 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:08:28 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:12:43 | INFO    | medibot | New chat created 0760c555-33c2-4843-94cf-edb70ef4b891 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 13:13:42 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:13:42 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:13:50 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:14:04 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:14:04 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:14:10 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:16:10 | INFO    | medibot | New chat created ded1d4e9-cb7d-4d6b-8ca5-cc1c98864a0f for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 13:16:19 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:16:19 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:16:26 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:16:47 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:16:47 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:16:54 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:17:15 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:17:15 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:17:21 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:19:37 | INFO    | medibot | New chat created e6c5cdc4-1a73-4204-b255-e599d38b0caa for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 13:19:41 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:19:41 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:19:48 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:23:49 | INFO    | medibot | New chat created e4d2f41e-6d4c-4f79-bf19-15a16da2556d for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 13:23:55 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:23:55 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:24:04 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:24:30 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:24:30 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:24:38 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:24:57 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:24:57 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:25:04 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:25:24 | INFO    | medibot | New chat created 8055e610-9f87-47f6-bcdf-8ac7497357fe for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 13:27:48 | INFO    | medibot | New chat created c6c7e9b0-9491-47e0-9b7a-184932218c9d for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-26 13:28:06 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:28:06 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:28:13 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:28:20 | INFO    | medibot | New chat created 6b9e2c7f-1383-4fbd-999b-45029a9eefc1 for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-26 13:28:24 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:28:24 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:28:31 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:38:30 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:38:30 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:38:37 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:39:01 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:39:01 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:39:07 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:39:37 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:39:37 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:39:44 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:40:26 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:40:26 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:40:32 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:41:35 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:41:35 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:41:42 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:56:06 | INFO    | medibot | New chat created 7830d080-6afb-4255-9e6b-487e73b6364a for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-26 13:56:06 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:56:06 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:56:12 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 13:56:12 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 13:56:13 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:56:20 | INFO    | medibot | New chat created f24ef9ec-c5ee-479b-bb17-966fe07ea89e for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-26 13:56:36 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:56:36 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:56:41 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:56:50 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:56:50 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:56:56 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:57:59 | INFO    | medibot | New chat created 0db05969-13c9-40f3-aa74-53218d352d59 for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-26 13:57:59 | INFO    | medibot | New chat created 8eee6749-bbbb-42aa-a87d-aeaa1be9b4da for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-26 13:58:00 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:58:00 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:58:30 | WARNING | huggingface_hub.utils._http | '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 36486bd4-6669-4382-b45f-91ff353d8d79)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/./modules.json
+2025-11-26 13:58:30 | WARNING | huggingface_hub.utils._http | Retrying in 1s [Retry 1/5].
+2025-11-26 13:58:44 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 13:59:45 | INFO    | medibot | New chat created 7ea65a67-81f1-4fe1-bb6e-e0bf0584147e for user df4bd02f-c10f-478e-a2c6-07ed57b6c50f
+2025-11-26 13:59:46 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 13:59:46 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 13:59:53 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 14:00:00 | INFO    | medibot | New chat created 20120bb0-08ce-46d1-be2a-4742a71bfdcb for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-26 14:00:35 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 14:00:35 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 14:00:43 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 14:54:12 | INFO    | medibot | New chat created 84863778-7191-4d1e-b7b3-899572d3580a for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 14:54:12 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 14:54:12 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 14:54:22 | WARNING | huggingface_hub.utils._http | '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 23bf18fa-4c3c-4ab5-bb5d-d3039e53b91f)')' thrown while requesting HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/./modules.json
+2025-11-26 14:54:22 | WARNING | huggingface_hub.utils._http | Retrying in 1s [Retry 1/5].
+2025-11-26 14:54:32 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 14:54:39 | INFO    | medibot | New chat created 7a2eb8d3-07d1-4e2a-ac4b-2f733f726128 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 14:54:47 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 14:54:47 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 14:54:55 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 15:36:22 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 15:36:22 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 15:36:26 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 15:36:27 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 15:36:28 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 15:37:06 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 15:37:06 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 15:37:10 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 15:51:09 | INFO    | medibot | New chat created 27ea8045-b7d6-488c-97c1-ac7dbfee4dcb for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 15:51:13 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 15:51:17 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 15:51:17 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 15:51:17 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 15:51:17 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 15:51:17 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 15:51:17 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 15:51:29 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 15:51:29 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 15:51:29 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 15:51:29 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 15:51:39 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 15:52:14 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 15:52:14 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 15:52:22 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 15:56:23 | INFO    | medibot | New chat created 9f8d404c-f14b-45fe-aae3-3c1026f716f0 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 15:56:26 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 15:56:29 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 15:56:29 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 15:56:37 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 15:56:37 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 15:56:37 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 15:56:37 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 15:56:44 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 15:59:16 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 15:59:16 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-26 15:59:24 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 16:07:55 | INFO    | medibot | New chat created 2cd3f9ad-a549-49b1-b2f1-00d1c31510e5 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 16:08:00 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 16:08:06 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 16:08:07 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 16:08:07 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 16:08:07 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 16:08:07 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:08:07 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:08:14 | WARNING | huggingface_hub.file_download | Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-11-26 16:09:04 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 16:09:04 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 16:09:05 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 16:09:05 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 16:09:05 | WARNING | unstructured | libmagic is unavailable but assists in filetype detection. Please consider installing libmagic for better results.
+2025-11-26 16:09:05 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:09:05 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:09:10 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 16:09:10 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 16:09:10 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:09:10 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:09:20 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:09:20 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:09:21 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 16:09:27 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 16:09:33 | INFO    | medibot | New chat created 5f989bc9-411b-40fd-b5b1-8ba1420552fc for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 16:10:26 | INFO    | medibot | New chat created 533e091d-93a5-4506-bafa-1d0c6e27c364 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 16:10:29 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:10:29 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:10:39 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 16:10:49 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:10:49 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:10:58 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 16:11:07 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:11:07 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:11:15 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 16:11:41 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:11:41 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:11:48 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 16:12:08 | INFO    | medibot | New chat created 9526d9cd-2df7-4f29-8ce7-492bd531aa44 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 16:12:16 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:12:16 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:12:22 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
