@@ -11,6 +11,11 @@
     #messages > div {
         margin-bottom: 12px;
     }
+    @media screen and (max-width: 300px) {
+    #chatList {
+        font-size: 20px;
+    }
+}
 
 
     /* Chat bubble spacing */
@@ -29,7 +34,7 @@
 
 <body class="h-screen bg-gray-100 flex overflow-hidden">
 
-    <!-- ======================= LEFT SIDEBAR ======================= -->
+    <!-- LEFT SIDEBAR --> 
     <div id="sidebar" class="w-72 bg-gray-900 text-white flex flex-col shadow-xl">
 
         <div class="p-5 border-b border-gray-700 flex justify-between items-center">
@@ -45,11 +50,12 @@
             + New Chat
         </button>
 
-        <div id="chatList" class="px-3 flex-1 overflow-y-auto space-y-1"></div>
+        <div id="chatList" class="py-1 flex-1 overflow-y-auto space-y-1"></div>
+
     </div>
 
 
-    <!-- ======================= CHAT WINDOW ======================= -->
+    <!-----CHAT WINDOW  -->
     <div class="flex-1 flex flex-col bg-white">
         <!-- HEADER -->
         <header class="p-4 bg-blue-600 text-white shadow flex justify-between items-center">
@@ -95,39 +101,37 @@ let conversation_id=null;
 
 if(!token||!user_id) window.location.href="/";
 
-/* Load chat list */
+
 /* Load chat list with delete buttons */
 async function loadChats() {
     const res = await fetch(`${API}/chat_list`, {
         headers: { Authorization: `Bearer ${token}` }
     });
+
     let list = await res.json();
     chatList.innerHTML = "";
 
-    let chatCount = 1; // Initialize chat count for naming chats
-
     list.forEach(chat => {
-        // wrapper div for chat item
         let item = document.createElement("div");
-        item.className = "flex justify-between items-center w-full bg-gray-800 hover:bg-gray-700 p-2 rounded";
+        item.className =
+            "flex justify-between items-center w-full bg-gray-800 hover:bg-gray-700 p-2 rounded";
 
-        // chat button (click to open)
+        // Chat open button
         let b = document.createElement("button");
-        b.className = "text-left flex-1 truncate"; // truncate if long
+        b.className = "text-left flex-1 truncate font-medium";
 
-        // Format chat name with incremented chat count and the current date
-        let date = new Date().toLocaleDateString('en-GB'); // Format as DD/MM/YYYY
-        let chatName = `Chat ${chatCount} - ${date}`;
-        b.textContent = chatName;  // Set the button text to be the formatted name
+        // If no title yet → display placeholder
+        b.textContent = chat.title || "New Chat";
 
         b.onclick = () => openChat(chat.chat_id);
 
-        // delete button
+        // Delete button
         let del = document.createElement("button");
-        del.className = "ml-2 hover:bg-red-700 px-2 py-1 rounded text-white text-xs";
+        del.className =
+            "ml-2 hover:bg-red-700 px-2 py-1 rounded text-white text-xs";
         del.textContent = "X";
         del.onclick = async (e) => {
-            e.stopPropagation(); // prevent opening chat
+            e.stopPropagation();
             if (!confirm("Delete this chat permanently?")) return;
 
             await fetch(`${API}/delete_chat/${chat.chat_id}`, {
@@ -135,10 +139,8 @@ async function loadChats() {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
-            // remove from UI
             item.remove();
 
-            // clear chat panel if current chat deleted
             if (conversation_id === chat.chat_id) {
                 messages.innerHTML = "";
                 currentChatID.textContent = "";
@@ -149,11 +151,9 @@ async function loadChats() {
         item.appendChild(b);
         item.appendChild(del);
         chatList.appendChild(item);
-
-        // Increment the chat count after processing each chat
-        chatCount++;
     });
 }
+
 
 
 
@@ -223,7 +223,14 @@ async function sendMessage(){
 
     appendMsg("user",msg,true);
     msgInput.value="";
-    showTyping();
+    showTyping();   
+    // BLOCK HTML / JS input completely
+if (/<[^>]+>/g.test(msg)) {
+    appendMsg("assistant", " Invalid msg, Please write a correct medical query");
+    return;
+}
+
+    
 
     const r=await fetch(`${API}/chat`,{
         method:"POST",
@@ -241,16 +248,28 @@ async function sendMessage(){
 }
 
 /* UI helpers */
-function appendMsg(role,text,animate=true){
-    const msg=document.createElement("div");
-    msg.className=`flex ${role==="user"?"justify-end":""} ${animate?"animate-fade":""}`;
-    let b=document.createElement("div");
-    b.className=`p-3 max-w-xl rounded-xl shadow-md ${role==="user"?"bg-blue-600 text-white":"bg-white border"}`;
-    b.innerHTML=marked.parse(text);
+function appendMsg(role, text, animate = true) {
+    const msg = document.createElement("div");
+    msg.className = `flex ${role === "user" ? "justify-end" : ""} ${animate ? "animate-fade" : ""}`;
+    
+    const b = document.createElement("div");
+    b.className = `p-3 max-w-xl rounded-xl shadow-md leading-relaxed whitespace-pre-line 
+                   ${role === "user" ? "bg-blue-600 text-white" : "bg-white border"}`;
+
+    let clean = text
+        .replace(/<\/?[^>]+>/gi, "")
+        .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
+        .replace(/[•]/g, "\n• ")
+        .replace(/(\d\.)/g, "\n$1 ")
+        .trim();
+
+    b.innerHTML = clean.replace(/\n/g, "<br>");
     msg.appendChild(b);
     messages.appendChild(msg);
     scrollMessages();
 }
+
+
 
 function clearChat(){ messages.innerHTML=""; }
 function scrollMessages(){ setTimeout(()=>messages.scrollTop=messages.scrollHeight,80); }
@@ -279,7 +298,7 @@ function toggleRecording(){
     if(!recognition) initSpeech();
     isRecording?recognition.stop():recognition.start();
 }
-/* ---------------- NEW: Sidebar toggle ---------------- */
+/* Sidebar toggle*/
 function toggleSidebar(){
     document.getElementById("sidebar").classList.toggle("hidden");
 }

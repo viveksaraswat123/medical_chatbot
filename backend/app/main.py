@@ -8,15 +8,12 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
-
 from fastapi import Depends
 from .auth import signup, login, verify_token
 from .chat_storage import start_chat, save_msg, get_chat_history, list_user_chats
-from .chatbot_logic import get_chatbot_response
+from .chatbot_logic import get_chatbot_response, generate_chat_title
 from .db import chats
 
-
-# ------------ ENV + LOGGING ------------
 ENV_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".env"))
 load_dotenv(ENV_PATH)
 
@@ -50,8 +47,6 @@ DICT_LOG_CONFIG = {
 dictConfig(DICT_LOG_CONFIG)
 logger = logging.getLogger("medibot")
 
-
-# ------------ FASTAPI APP ------------
 app = FastAPI(title="MediBot API", version="1.0.0")
 
 app.add_middleware(
@@ -91,8 +86,6 @@ async def read_signup():
 async def read_chat():
     return FileResponse(os.path.join(FRONTEND_DIR, "chat.html"))
 
-
-# ------------ MODELS ------------
 class SignupRequest(BaseModel):
     name: str
     email: str
@@ -120,17 +113,17 @@ def get_current_user(authorization: str = Header(None)):
     return payload
 
 
-# ------------ ROUTES: AUTH ------------
+#signup
 @app.post("/api/signup")
 def register(req: SignupRequest):
     return signup(req.name, req.email, req.password)
 
+#login api
 @app.post("/api/login")
 def user_login(req: LoginRequest):
     return login(req.email, req.password)
 
-
-# ------------ CHAT SYSTEM API ------------
+#new_chat api
 @app.post("/api/new_chat")
 def new_chat(current_user: dict = Depends(get_current_user)):
     user_id = current_user.get("user_id")
@@ -138,34 +131,39 @@ def new_chat(current_user: dict = Depends(get_current_user)):
     logger.info("New chat created %s for user %s", chat_id, user_id)
     return {"chat_id": chat_id}
 
+
+#api for chat
 @app.post("/api/chat")
 def chat(req: ChatRequest, current_user: dict = Depends(get_current_user)):
     try:
         user_id = current_user.get("user_id")
+        chat = get_chat_history(req.conversation_id, user_id)
 
-        # verify chat belongs to user
-        _ = get_chat_history(req.conversation_id, user_id)
+        if not chat.get("title"): 
+            title = generate_chat_title(req.message)
 
-        # <<< RESPONSE FIX HERE
+            chats.update_one(
+                {"chat_id": req.conversation_id},
+                {"$set": {"title": title}}
+            )
+        else:
+            title = chat["title"]
+
         response = get_chatbot_response(req.conversation_id, req.message)
-        if isinstance(response, tuple):
-            response = response[0]   # unwrap tuple
+        if isinstance(response, tuple): response = response[0]
 
-        # save messages properly
         save_msg(req.conversation_id, "user", req.message)
         save_msg(req.conversation_id, "assistant", response)
 
-        return {"response": response}
+        return {
+            "chat_id": req.conversation_id,
+            "title": title,
+            "response": response
+        }
 
-    except HTTPException:
-        raise
     except Exception as e:
         logger.exception(f"Chat failure: {e}")
-        raise HTTPException(500, "Chat Failure")
-
-
-    
-
+        raise HTTPException(status_code=500, detail="Chat Failure")
 
 @app.get("/api/chat_list")
 def get_chat_list(current_user: dict = Depends(get_current_user)):
