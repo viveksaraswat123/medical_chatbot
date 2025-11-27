@@ -9,6 +9,7 @@ def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
 
+
 def get_chatbot_response(conversation_id: str, user_query: str, chat_history: str = ""):
 
     retriever = get_retriever()
@@ -49,14 +50,15 @@ RULES OF CONTENT
    • treatments
    • prescriptions
    • medication dosages
-4. If the user describes emergency symptoms (e.g., chest pain, stroke symptoms):
+4. If user input grettings such as hi, hello, hey, RESPOND THEM NICELY WITH A INTRO, AND ASK IS EVERYTNING OKK? HOW MAY I HELP YOU?
+5. If the user describes emergency symptoms (e.g., chest pain, stroke symptoms):
    RESPOND ONLY:
    "⚠️ This sounds serious. Please contact emergency services immediately or visit the nearest emergency room."
-5. If the user asks a non-medical question:
+6. If the user asks a non-medical question:
    Respond with:
    "I cannot answer non-medical questions. My purpose is to provide medical information only."
-6. Keep language authoritative and medically accurate.
-7. Keep every answer well-organized and formatted EXACTLY as instructed.
+7. Keep language authoritative and medically accurate.
+8. Keep every answer well-organized and formatted EXACTLY as instructed.
 
 -----------------------------------------
 DISCLAIMER (MANDATORY)
@@ -98,3 +100,27 @@ ANSWER:
 
     response = chain.invoke(user_query)
     return response
+
+def generate_chat_title(first_message: str) -> str:
+    """
+    Generates short title from first user message for chat list naming (Like ChatGPT)
+    """
+
+    llm = ChatGroq(
+        model=os.getenv("LLM_MODEL", "llama-3.1-8b-instant"),
+        temperature=0.1,
+        groq_api_key=os.getenv("GROQ_API_KEY")
+    )
+
+    title_prompt = f"""
+Convert this user's first query into a short medical chat title.
+Rules:
+• Max 6 words
+• No diagnosis prediction
+• Just topic summary
+• Return ONLY title (no explanation)
+
+Query: "{first_message}"
+"""
+
+    return llm.invoke(title_prompt).content.strip().replace("\n", "")

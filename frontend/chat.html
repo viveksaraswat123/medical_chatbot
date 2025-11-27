@@ -11,27 +11,55 @@
     #messages > div {
         margin-bottom: 12px;
     }
+
+
+    /* Chat bubble spacing */
+    #messages > div { margin-bottom: 12px; }
+
+    /* --- NEW: MOBILE RESPONSIVENESS FOR SIDEBAR --- */
+    #sidebar { transition: transform .35s ease; }
+    #sidebar.hidden { transform: translateX(-100%); }
+
+    @media(max-width:768px){
+        #sidebar { position:absolute; left:0; top:0; height:100%; z-index:30; }
+    }
+</style>
+
 </style>
 
 <body class="h-screen bg-gray-100 flex overflow-hidden">
+
     <!-- ======================= LEFT SIDEBAR ======================= -->
-    <div class="w-72 bg-gray-900 text-white flex flex-col shadow-xl">
+    <div id="sidebar" class="w-72 bg-gray-900 text-white flex flex-col shadow-xl">
+
         <div class="p-5 border-b border-gray-700 flex justify-between items-center">
             <h2 class="text-lg font-semibold">Your Chats</h2>
-            <button onclick="logout()" class="text-red-400 hover:text-red-300 text-xs">Logout</button>
+            
+            <!-- NEW HIDE BUTTON -->
+            
         </div>
 
-        <button onclick="createNewChat()" class="m-3 w-fit bg-blue-600 hover:bg-blue-700 p-2 rounded text-sm font-semibold transition">
+        <!-- NEW CHAT BUTTON -->
+        <button onclick="createNewChat()" 
+            class="m-3 w-fit bg-blue-600 hover:bg-blue-700 p-2 rounded text-sm font-semibold transition">
             + New Chat
         </button>
 
         <div id="chatList" class="px-3 flex-1 overflow-y-auto space-y-1"></div>
     </div>
 
+
     <!-- ======================= CHAT WINDOW ======================= -->
     <div class="flex-1 flex flex-col bg-white">
         <!-- HEADER -->
         <header class="p-4 bg-blue-600 text-white shadow flex justify-between items-center">
+
+    <!-- MOBILE MENU BUTTON -->
+    <button onclick="toggleSidebar()" 
+        class="block md:#sidebar bg-black/30 hover:bg-black/50 px-3 py-1 rounded text-sm mr-2">
+        ☰ 
+    </button>
+
             <div>
                 <h2 class="text-xl font-semibold">Medical ChatBot</h2>
                 <p class="opacity-80 text-sm">Medical AI Assistant</p>
@@ -40,8 +68,7 @@
             <div class="flex items-center gap-3">
                 <!-- CHAT ID -->
                 <p id="currentChatID" class="text-sm bg-blue-800 px-3 py-1 rounded-lg"></p>
-                <button onclick="deleteChat()" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white">🗑️</button>
-
+                
             </div>
         </header>
 
@@ -77,6 +104,8 @@ async function loadChats() {
     let list = await res.json();
     chatList.innerHTML = "";
 
+    let chatCount = 1; // Initialize chat count for naming chats
+
     list.forEach(chat => {
         // wrapper div for chat item
         let item = document.createElement("div");
@@ -85,13 +114,18 @@ async function loadChats() {
         // chat button (click to open)
         let b = document.createElement("button");
         b.className = "text-left flex-1 truncate"; // truncate if long
-        b.textContent = chat.chat_id;             // full chat_id
+
+        // Format chat name with incremented chat count and the current date
+        let date = new Date().toLocaleDateString('en-GB'); // Format as DD/MM/YYYY
+        let chatName = `Chat ${chatCount} - ${date}`;
+        b.textContent = chatName;  // Set the button text to be the formatted name
+
         b.onclick = () => openChat(chat.chat_id);
 
         // delete button
         let del = document.createElement("button");
-        del.className = "ml-2 bg-red-600 hover:bg-red-700 px-2 py-1 rounded text-white text-xs";
-        del.textContent = "🗑️";
+        del.className = "ml-2 hover:bg-red-700 px-2 py-1 rounded text-white text-xs";
+        del.textContent = "X";
         del.onclick = async (e) => {
             e.stopPropagation(); // prevent opening chat
             if (!confirm("Delete this chat permanently?")) return;
@@ -115,8 +149,12 @@ async function loadChats() {
         item.appendChild(b);
         item.appendChild(del);
         chatList.appendChild(item);
+
+        // Increment the chat count after processing each chat
+        chatCount++;
     });
 }
+
 
 
 /* Create new chat */
@@ -240,6 +278,10 @@ function initSpeech(){
 function toggleRecording(){
     if(!recognition) initSpeech();
     isRecording?recognition.stop():recognition.start();
+}
+/* ---------------- NEW: Sidebar toggle ---------------- */
+function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("hidden");
 }
 
 loadChats();

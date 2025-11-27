@@ -249,3 +249,403 @@
 2025-11-26 16:12:16 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
 2025-11-26 16:12:16 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
 2025-11-26 16:12:22 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 16:19:50 | INFO    | medibot | New chat created b71b96dc-64d2-4344-aad9-d2ce84559290 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 16:19:53 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:19:53 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:19:59 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 16:19:59 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 16:20:04 | INFO    | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-11-26 16:20:04 | ERROR   | medibot | Chat failure: Error code: 400 - {'error': {'message': "Invalid type for 'messages[0].content': expected one of a string or array of objects, but got an object instead.", 'type': 'invalid_request_error', 'param': 'messages[0].content', 'code': 'invalid_type'}}
+Traceback (most recent call last):
+  File "E:\medical_chatbot\backend\app\main.py", line 150, in chat
+    response = get_chatbot_response(req.conversation_id, req.message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 103, in get_chatbot_response
+    return chain.invoke(user_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 3129, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 4857, in invoke
+    return self._call_with_config(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 2050, in _call_with_config
+    context.run(
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\config.py", line 428, in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 4714, in _invoke
+    output = call_func_with_variable_args(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\config.py", line 428, in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 96, in <lambda>
+    | (lambda messages: client.chat.completions.create(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1189, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid type for 'messages[0].content': expected one of a string or array of objects, but got an object instead.", 'type': 'invalid_request_error', 'param': 'messages[0].content', 'code': 'invalid_type'}}
+2025-11-26 16:20:25 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:20:25 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:20:31 | INFO    | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-11-26 16:20:31 | ERROR   | medibot | Chat failure: Error code: 400 - {'error': {'message': "Invalid type for 'messages[0].content': expected one of a string or array of objects, but got an object instead.", 'type': 'invalid_request_error', 'param': 'messages[0].content', 'code': 'invalid_type'}}
+Traceback (most recent call last):
+  File "E:\medical_chatbot\backend\app\main.py", line 150, in chat
+    response = get_chatbot_response(req.conversation_id, req.message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 103, in get_chatbot_response
+    return chain.invoke(user_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 3129, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 4857, in invoke
+    return self._call_with_config(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 2050, in _call_with_config
+    context.run(
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\config.py", line 428, in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 4714, in _invoke
+    output = call_func_with_variable_args(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\config.py", line 428, in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 96, in <lambda>
+    | (lambda messages: client.chat.completions.create(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1189, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid type for 'messages[0].content': expected one of a string or array of objects, but got an object instead.", 'type': 'invalid_request_error', 'param': 'messages[0].content', 'code': 'invalid_type'}}
+2025-11-26 16:20:40 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:20:40 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:20:46 | INFO    | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-11-26 16:20:46 | ERROR   | medibot | Chat failure: Error code: 400 - {'error': {'message': "Invalid type for 'messages[0].content': expected one of a string or array of objects, but got an object instead.", 'type': 'invalid_request_error', 'param': 'messages[0].content', 'code': 'invalid_type'}}
+Traceback (most recent call last):
+  File "E:\medical_chatbot\backend\app\main.py", line 150, in chat
+    response = get_chatbot_response(req.conversation_id, req.message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 103, in get_chatbot_response
+    return chain.invoke(user_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 3129, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 4857, in invoke
+    return self._call_with_config(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 2050, in _call_with_config
+    context.run(
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\config.py", line 428, in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 4714, in _invoke
+    output = call_func_with_variable_args(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\config.py", line 428, in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 96, in <lambda>
+    | (lambda messages: client.chat.completions.create(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1189, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid type for 'messages[0].content': expected one of a string or array of objects, but got an object instead.", 'type': 'invalid_request_error', 'param': 'messages[0].content', 'code': 'invalid_type'}}
+2025-11-26 16:21:21 | INFO    | medibot | New chat created a50c62c3-e526-427d-b6de-7b36776f058b for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 16:21:24 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:21:24 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:21:28 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 16:21:28 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 16:21:30 | INFO    | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-11-26 16:21:30 | ERROR   | medibot | Chat failure: Error code: 400 - {'error': {'message': "Invalid type for 'messages[0].content': expected one of a string or array of objects, but got an object instead.", 'type': 'invalid_request_error', 'param': 'messages[0].content', 'code': 'invalid_type'}}
+Traceback (most recent call last):
+  File "E:\medical_chatbot\backend\app\main.py", line 150, in chat
+    response = get_chatbot_response(req.conversation_id, req.message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 103, in get_chatbot_response
+    return chain.invoke(user_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 3129, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 4857, in invoke
+    return self._call_with_config(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 2050, in _call_with_config
+    context.run(
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\config.py", line 428, in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 4714, in _invoke
+    output = call_func_with_variable_args(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\config.py", line 428, in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 96, in <lambda>
+    | (lambda messages: client.chat.completions.create(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1189, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid type for 'messages[0].content': expected one of a string or array of objects, but got an object instead.", 'type': 'invalid_request_error', 'param': 'messages[0].content', 'code': 'invalid_type'}}
+2025-11-26 16:25:14 | INFO    | medibot | New chat created 503bb92e-51a0-4797-8ee4-f768e454855c for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 16:25:14 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:25:14 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:25:21 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 16:25:21 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 16:25:24 | INFO    | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-11-26 16:25:24 | ERROR   | medibot | Chat failure: Error code: 400 - {'error': {'message': "Invalid type for 'messages[0].content': expected one of a string or array of objects, but got an object instead.", 'type': 'invalid_request_error', 'param': 'messages[0].content', 'code': 'invalid_type'}}
+Traceback (most recent call last):
+  File "E:\medical_chatbot\backend\app\main.py", line 150, in chat
+    response = get_chatbot_response(req.conversation_id, req.message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 68, in get_chatbot_response
+    response = chain.invoke(user_query)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 3129, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 4857, in invoke
+    return self._call_with_config(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 2050, in _call_with_config
+    context.run(
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\config.py", line 428, in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\base.py", line 4714, in _invoke
+    output = call_func_with_variable_args(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\langchain_core\runnables\config.py", line 428, in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 61, in <lambda>
+    | (lambda prompt_text: client.chat.completions.create(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1189, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid type for 'messages[0].content': expected one of a string or array of objects, but got an object instead.", 'type': 'invalid_request_error', 'param': 'messages[0].content', 'code': 'invalid_type'}}
+2025-11-26 16:28:44 | INFO    | medibot | New chat created ed507118-999e-45e6-ac4e-5a6c01051404 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 16:28:44 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:28:44 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:28:51 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 16:28:51 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 16:28:51 | ERROR   | medibot | Chat failure: 'VectorStoreRetriever' object has no attribute 'get_relevant_documents'
+Traceback (most recent call last):
+  File "E:\medical_chatbot\backend\app\main.py", line 150, in chat
+    response = get_chatbot_response(req.conversation_id, req.message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 54, in get_chatbot_response
+    context=format_docs(retriever.get_relevant_documents(user_query)),
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\pydantic\main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'VectorStoreRetriever' object has no attribute 'get_relevant_documents'
+2025-11-26 16:33:20 | INFO    | medibot | New chat created 96816e84-11c6-4f1e-8473-12666106d2a9 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 16:33:20 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:33:20 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:33:27 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 16:33:28 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 16:33:28 | ERROR   | medibot | Chat failure: 'VectorStoreRetriever' object has no attribute 'retrieve'
+Traceback (most recent call last):
+  File "E:\medical_chatbot\backend\app\main.py", line 150, in chat
+    response = get_chatbot_response(req.conversation_id, req.message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 15, in get_chatbot_response
+    docs = retriever.retrieve(user_query)  # ✅ Use retrieve(), not get_relevant_documents
+           ^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\pydantic\main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'VectorStoreRetriever' object has no attribute 'retrieve'
+2025-11-26 16:51:34 | INFO    | medibot | New chat created 28990bc9-7832-479d-8cf9-beb5cf31a5f4 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 16:51:35 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:51:35 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:51:42 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 16:51:42 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 16:51:42 | ERROR   | medibot | Chat failure: 'VectorStoreRetriever' object has no attribute 'get_relevant_documents'
+Traceback (most recent call last):
+  File "E:\medical_chatbot\backend\app\main.py", line 150, in chat
+    response = get_chatbot_response(req.conversation_id, req.message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 15, in get_chatbot_response
+    docs = retriever.get_relevant_documents(user_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\pydantic\main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'VectorStoreRetriever' object has no attribute 'get_relevant_documents'
+2025-11-26 16:54:01 | INFO    | medibot | New chat created 321bb3f1-0af3-4529-a372-5ff01037faca for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 16:54:01 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 16:54:01 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 16:54:08 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 16:54:08 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 16:54:08 | ERROR   | medibot | Chat failure: 'VectorStoreRetriever' object has no attribute 'get_relevant_documents'
+Traceback (most recent call last):
+  File "E:\medical_chatbot\backend\app\main.py", line 150, in chat
+    response = get_chatbot_response(req.conversation_id, req.message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\backend\app\chatbot_logic.py", line 16, in get_chatbot_response
+    docs = retriever.get_relevant_documents(user_query)  # Assuming this is working after `as_retriever()`
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\medical_chatbot\my_env\Lib\site-packages\pydantic\main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'VectorStoreRetriever' object has no attribute 'get_relevant_documents'
+2025-11-26 17:01:49 | INFO    | medibot | New chat created 754048d8-2275-4e72-9f11-ea3031620825 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 17:01:50 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 17:01:50 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 17:01:56 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 17:01:57 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 17:02:00 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 17:38:17 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 17:38:17 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 17:38:24 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 17:48:26 | INFO    | medibot | New chat created 8197a35b-8a63-4556-8b01-cae098342606 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-26 17:48:31 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 17:48:31 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 17:48:38 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-26 17:48:38 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-26 17:48:42 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 17:48:57 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 17:48:57 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 17:49:03 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 17:49:21 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 17:49:21 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 17:49:28 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 17:49:48 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 17:49:48 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 17:49:54 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 17:55:46 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 17:55:46 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 17:55:54 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 17:56:19 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 17:56:19 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 17:56:26 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-26 17:56:43 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-26 17:56:43 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-26 17:56:50 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 11:18:06 | INFO    | medibot | New chat created 68e8fca7-a656-41a5-86b7-d21b4d5765a0 for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 11:18:07 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 11:18:07 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 11:18:14 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 11:18:26 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 11:18:26 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 11:18:31 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 11:18:46 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 11:18:46 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 11:18:50 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 11:18:59 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 11:18:59 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 11:19:03 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 11:19:15 | INFO    | medibot | New chat created e922541c-c83f-4697-bc8f-7663943bacba for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 11:19:32 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 11:19:32 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 11:19:40 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 11:20:49 | INFO    | medibot | New chat created 59795011-8001-476c-bccd-b424101ab5e4 for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 11:20:49 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 11:20:49 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 11:20:54 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 15:19:29 | INFO    | medibot | New chat created 14d77bf7-91f1-4f77-bf39-92ea134c0960 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:20:02 | INFO    | medibot | New chat created d83d3cea-b289-40c0-b6ca-a86dee310c2f for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:20:02 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 15:20:02 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 15:20:13 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-11-27 15:20:13 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-11-27 15:20:19 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 15:25:51 | INFO    | medibot | New chat created f0a9241e-c3f9-47c2-9b02-11e2ab052586 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:25:56 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 15:25:56 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 15:26:05 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 15:27:38 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 15:27:38 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 15:27:48 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 15:30:57 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 15:30:57 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 15:31:06 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 15:34:50 | INFO    | medibot | New chat created b5481e74-5135-44ba-9c75-1d5231faf184 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:35:06 | INFO    | medibot | New chat created 7130f77b-ee7b-436e-8f32-62b2c4f0ed07 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:35:07 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 15:35:07 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 15:35:16 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 15:35:27 | INFO    | medibot | New chat created f844e840-98a4-408a-b4d3-935f91ca4a7f for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:35:27 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 15:35:27 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 15:35:41 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 15:38:13 | INFO    | medibot | New chat created 4096cdae-3063-437a-a935-5edd9a72fd1f for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:52:03 | INFO    | medibot | New chat created 3058538e-70ce-4c0e-8dcf-8f675b6ad35b for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:52:03 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 15:52:03 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 15:52:11 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 15:54:51 | INFO    | medibot | New chat created a8cc6434-4ad7-48e9-aa19-e3afcff322ba for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:55:00 | INFO    | medibot | New chat created 65a3211d-e5ae-4552-b848-7fe5bc10892c for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:55:00 | INFO    | medibot | New chat created 077a2814-fb3b-4c19-b16f-f01106875098 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:55:00 | INFO    | medibot | New chat created dfaba28b-f5b4-42c6-ae0f-6be5ae0b70ba for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:55:00 | INFO    | medibot | New chat created 4c864987-3534-47ef-9342-44b357848014 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:55:00 | INFO    | medibot | New chat created e8d38f9e-117b-4980-bc45-b3f2efdb8f16 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:55:00 | INFO    | medibot | New chat created d5a52f89-3306-44d3-b379-08a243fbc813 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:55:01 | INFO    | medibot | New chat created c509d199-5404-476a-88a8-a520ebec452b for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:55:05 | INFO    | medibot | New chat created 4d093a44-d52c-4982-a84c-c26914b96751 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:55:06 | INFO    | medibot | New chat created f16d1521-189d-4101-af0f-47c106888e94 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 15:55:07 | INFO    | medibot | New chat created 013689da-8ad4-462a-a2be-4f979590a649 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-11-27 17:30:15 | INFO    | medibot | New chat created 072f17ec-8089-478e-92c8-574186b87e8b for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 17:30:16 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-27 17:30:16 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-11-27 17:30:25 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-27 17:30:32 | INFO    | medibot | New chat created e92c53a4-c0b4-44a3-bb18-330f4741783b for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 17:30:32 | INFO    | medibot | New chat created cf5e90d8-0990-4d7b-ba8c-d814f7fe9fe7 for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 17:30:32 | INFO    | medibot | New chat created 4866558c-8bb0-46f4-9724-f22789f98571 for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 17:30:32 | INFO    | medibot | New chat created f68c4b5e-4091-4e89-a2ed-1cee933ae190 for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 17:30:32 | INFO    | medibot | New chat created 6b2dd1cb-47fc-4c21-b2f1-cde3f4cef51b for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 17:30:32 | INFO    | medibot | New chat created a34b1e27-2b64-4873-a4b9-39d630c8bd8f for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 17:30:33 | INFO    | medibot | New chat created 4c613da7-8dd2-44ce-a4a8-8e73b89d95f1 for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 17:30:33 | INFO    | medibot | New chat created 20ad648a-0a1a-4756-8268-8b1c4b727b41 for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 17:30:33 | INFO    | medibot | New chat created cc62b016-8ca6-45b5-9a0b-1bf6972734ab for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 17:30:33 | INFO    | medibot | New chat created e6775b70-3ac5-48f2-9e57-a4f829ab378d for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 17:30:33 | INFO    | medibot | New chat created 9c733d9d-0084-4ba2-96bc-b4a72db3448e for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
+2025-11-27 17:30:33 | INFO    | medibot | New chat created 0d2dad30-f4a0-42f1-b898-82ea981eab5e for user 23f144a9-7602-4e81-a77d-bfa7ed1be520
