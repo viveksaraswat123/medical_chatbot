@@ -803,3 +803,48 @@ AttributeError: 'VectorStoreRetriever' object has no attribute 'get_relevant_doc
 2025-11-27 22:50:47 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
 2025-11-27 22:50:53 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2025-11-27 22:52:41 | INFO    | medibot | New chat created eb74f2e5-b456-449f-8e8f-f631bdc06b23 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-12-01 21:51:42 | INFO    | medibot | New chat created dcf59424-ec88-41c0-9fb7-6557ed160fb0 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-12-01 21:51:43 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 21:51:43 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-12-01 21:51:43 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-12-01 21:51:49 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2025-12-01 21:51:49 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-12-01 21:51:52 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 21:52:02 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-12-01 21:52:02 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-12-01 21:52:07 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 21:54:05 | INFO    | medibot | New chat created accc23fa-9d1d-4e58-839e-ce8eeae64a22 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-12-01 21:54:05 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 21:54:05 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-12-01 21:54:05 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-12-01 21:54:10 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 22:03:09 | INFO    | medibot | New chat created 18016baf-ed06-40df-9971-5d1931adfbc7 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-12-01 22:03:09 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 22:03:09 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-12-01 22:03:09 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-12-01 22:03:13 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 22:03:29 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-12-01 22:03:29 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-12-01 22:03:34 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 22:05:53 | INFO    | medibot | New chat created 9739eafd-4396-4a06-9e02-6b8e31d9af1b for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-12-01 22:05:54 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 22:05:54 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-12-01 22:05:54 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-12-01 22:05:58 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 22:06:10 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-12-01 22:06:10 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-12-01 22:06:16 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 22:08:13 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-12-01 22:08:13 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-12-01 22:08:19 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 22:09:16 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-12-01 22:09:16 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-12-01 22:09:21 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 22:09:26 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-12-01 22:09:26 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-12-01 22:09:31 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 22:11:48 | INFO    | medibot | New chat created cbdc50e6-4ddf-4c84-b12c-a37fde00c3e2 for user 1019f2a5-6100-4183-aadd-a30f779968ca
+2025-12-01 22:12:03 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-01 22:12:03 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-12-01 22:12:03 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-base-en-v1.5
+2025-12-01 22:12:08 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"

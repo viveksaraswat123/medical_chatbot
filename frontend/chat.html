@@ -1,309 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>MediBot Chat</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-</head>
+<meta charset="UTF-8">
+<title>MediBot Chat</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <style>
-    /* Better bubbles */
-    #messages > div {
-        margin-bottom: 12px;
-    }
-    @media screen and (max-width: 300px) {
-    #chatList {
-        font-size: 20px;
-    }
+/* -------------------------------- MINI CHAT --------------------------------*/
+#miniChat{
+    position:fixed;bottom:25px;right:25px;
+    width:350px;height:440px;background:var(--bg);
+    border-radius:18px;overflow:hidden;
+    box-shadow:0 0 25px rgba(0,0,0,.25);
+    z-index:99999;display:none;flex-direction:column;
+    transition:.25s;
+}
+#miniMsgs{padding:12px;overflow-y:auto;height:100%;}
+
+/* Bubbles */
+.userBubble{
+    background:#2563eb;color:#fff;padding:10px 14px;
+    border-radius:20px 20px 0 20px;
+    max-width:75%;margin-left:auto;
+    animation:fade .25s;
+}
+.botBubble{
+    background:var(--bubble-bg);border:1px solid #dcdcdc;
+    padding:10px 14px;border-radius:20px 20px 20px 0;
+    max-width:75%;margin-right:auto;animation:fade .25s;
+}
+
+/* -------------------------------- FULL UI --------------------------------*/
+#fullChatUI{display:none;}
+#messages{padding:18px;font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont;}
+.msgWrap{display:flex;margin-bottom:10px;}
+.msgUser{justify-content:flex-end;}
+.msgBubble{
+    padding:10px 14px;max-width:70%;
+    border-radius:18px;box-shadow:0 2px 7px rgba(0,0,0,.07);
+    animation:fade .25s ease;
+}
+.userMsg{background:#2563eb;color:#fff;border-radius:18px 18px 0 18px;}
+.botMsg{background:var(--bubble-bg);border:1px solid #ddd;border-radius:18px 18px 18px 0;}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(6px);}
+    to{opacity:1;transform:none;}
+}
+
+/* -------------------------------- THEME --------------------------------*/
+:root{ --bg:white; --text:#111; --bubble-bg:white; }
+.dark{ --bg:#0f172a; --text:#eee; --bubble-bg:#1e293b; }
+
+body{background:var(--bg);color:var(--text);transition:.25s;}
+
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-thumb{background:#999;border-radius:6px;}
+</style>
+</head>
+<body>
+
+<!-- FLOAT BUTTON -->
+<button id="openBtn" onclick="openMini()" 
+class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-xl font-bold text-lg">
+💬 Chat
+</button>
+
+<!-- ================= MINI CHAT ================= -->
+<div id="miniChat">
+  <header class="bg-blue-600 text-white flex justify-between p-3">
+      <b>MediBot</b>
+      <div class="flex gap-2">
+          <button onclick="openFull()" class="bg-blue-900 text-xs px-2 rounded">⛶ Full</button>
+          <button onclick="closeMini()" class="bg-red-600 text-xs px-2 rounded">✕</button>
+      </div>
+  </header>
+
+  <div id="miniMsgs"></div>
+
+  <div class="p-2 border-t flex gap-2">
+      <input id="miniInput" placeholder="Ask..." class="flex-1 border p-2 rounded"
+          onkeydown="if(event.key==='Enter') sendMini()">
+      <button onclick="sendMini()" class="bg-green-600 text-white px-4 rounded">Send</button>
+  </div>
+</div>
+
+
+
+
+<!-- ================= FULL SCREEN UI ================= -->
+<div id="fullChatUI" class="h-screen flex overflow-hidden">
+
+  <!-- SIDEBAR -->
+  <div id="sidebar" class="w-72 bg-gray-900 text-white flex flex-col shadow-xl">
+      <div class="p-5 border-b border-gray-700">
+          <h2 class="text-lg font-semibold">Your Chats</h2>
+      </div>
+      <button onclick="createNewChat()" class="m-3 bg-blue-600 px-3 py-2 rounded">+ New Chat</button>
+      <div id="chatList" class="flex-1 overflow-y-auto p-2 space-y-1"></div>
+  </div>
+
+  <!-- CHAT WINDOW -->
+  <div class="flex-1 flex flex-col bg-white">
+
+      <header class="bg-blue-600 text-white flex justify-between items-center p-4">
+          <button onclick="toggleSidebar()" class="px-3 py-1 rounded bg-black/40">☰</button>
+          <h2 class="text-xl font-semibold">Medical ChatBot</h2>
+
+          <div class="flex gap-2">
+              <div id="currentChatID" class="px-2 py-1 text-xs bg-blue-900 rounded"></div>
+              <button onclick="toggleTheme()" class="bg-yellow-400 px-3 py-1 text-black rounded">☀/🌙</button>
+              <button onclick="closeFull()" class="bg-red-600 px-3 py-1 rounded">↩ Back</button>
+          </div>
+      </header>
+
+      <div id="messages" class="flex-1 overflow-y-auto bg-gradient-to-b from-blue-50 to-white"></div>
+
+      <div class="p-3 border-t flex gap-2">
+          <input id="msgInput" class="flex-1 p-2 border rounded-xl" placeholder="Ask anything..."
+              onkeydown="if(event.key==='Enter') sendMessage()">
+          <button onclick="sendMessage()" class="bg-green-600 px-6 text-white rounded">Send</button>
+      </div>
+
+  </div>
+</div>
+
+<script>
+// API
+const API="https://nonshrinkable-sumiko-unapprehendably.ngrok-free.dev/api";
+let token=localStorage.getItem("token"),
+    user_id=localStorage.getItem("user_id");
+let conversation_id=null;
+
+if(!token || !user_id){
+    window.location.href="/";
+}
+
+// ================= UI SHOW/HIDE =================
+function openMini(){
+    miniChat.style.display="flex";
+    openBtn.style.display="none";
+}
+function closeMini(){
+    miniChat.style.display="none";
+    openBtn.style.display="block";
+}
+function openFull(){
+    fullChatUI.style.display="flex";
+    miniChat.style.display="none";
+    openBtn.style.display="none";
+    loadChats();
+}
+function closeFull(){
+    fullChatUI.style.display="none";
+    miniChat.style.display="flex";
+    openBtn.style.display="block";
+}
+
+// ================= MINI CHAT SEND =================
+async function sendMini(){
+    if(!conversation_id) await createNewChat();
+
+    let msg = miniInput.value.trim();
+    if(!msg) return;
+
+    miniMsgs.innerHTML += `<div class="userBubble">${msg}</div>`;
+    miniInput.value = "";
+
+    const r = await fetch(`${API}/chat`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ conversation_id, message: msg })
+    });
+
+    const d = await r.json();
+    miniMsgs.innerHTML += `<div class="botBubble">${d.response}</div>`;
 }
 
 
-    /* Chat bubble spacing */
-    #messages > div { margin-bottom: 12px; }
 
-    /* --- NEW: MOBILE RESPONSIVENESS FOR SIDEBAR --- */
-    #sidebar { transition: transform .35s ease; }
-    #sidebar.hidden { transform: translateX(-100%); }
-
-    @media(max-width:768px){
-        #sidebar { position:absolute; left:0; top:0; height:100%; z-index:30; }
-    }
-</style>
-
-</style>
-
-<body class="h-screen bg-gray-100 flex overflow-hidden">
-
-    <!-- LEFT SIDEBAR --> 
-    <div id="sidebar" class="w-72 bg-gray-900 text-white flex flex-col shadow-xl">
-
-        <div class="p-5 border-b border-gray-700 flex justify-between items-center">
-            <h2 class="text-lg font-semibold">Your Chats</h2>
-            
-            <!-- NEW HIDE BUTTON -->
-            
-        </div>
-
-        <!-- NEW CHAT BUTTON -->
-        <button onclick="createNewChat()" 
-            class="m-3 w-fit bg-blue-600 hover:bg-blue-700 p-2 rounded text-sm font-semibold transition">
-            + New Chat
-        </button>
-
-        <div id="chatList" class="py-1 flex-1 overflow-y-auto space-y-1"></div>
-
-    </div>
-
-
-    <!-----CHAT WINDOW  -->
-    <div class="flex-1 flex flex-col bg-white">
-        <!-- HEADER -->
-        <header class="p-4 bg-blue-600 text-white shadow flex justify-between items-center">
-
-    <!-- MOBILE MENU BUTTON -->
-    <button onclick="toggleSidebar()" 
-        class="block md:#sidebar bg-black/30 hover:bg-black/50 px-3 py-1 rounded text-sm mr-2">
-        ☰ 
-    </button>
-
-            <div>
-                <h2 class="text-xl font-semibold">Medical ChatBot</h2>
-                <p class="opacity-80 text-sm">Medical AI Assistant</p>
-            </div>
-
-            <div class="flex items-center gap-3">
-                <!-- CHAT ID -->
-                <p id="currentChatID" class="text-sm bg-blue-800 px-3 py-1 rounded-lg"></p>
-                
-            </div>
-        </header>
-
-        <!-- MESSAGE PANEL -->
-        <div id="messages" class="flex-1 px-6 py-4 space-y-3 overflow-y-auto bg-gradient-to-b from-blue-50 to-white"></div>
-
-        <!-- INPUT FIELD -->
-        <div class="p-4 border-t bg-white flex gap-3">
-            <input id="msgInput" type="text" placeholder="Ask anything medical..." class="flex-1 p-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" onkeydown="if(event.key==='Enter') sendMessage()">
-
-            <!-- Microphone Button -->
-            <button id="micBtn" onclick="toggleRecording()" class="bg-gray-700 hover:bg-gray-900 text-white px-4 rounded">🎤</button>
-
-            <button onclick="sendMessage()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-xl font-semibold shadow">Send ➤</button>
-            <button onclick="clearChat()" class="bg-red-500 hover:bg-red-600 text-white px-4 rounded-lg font-semibold">Clear</button>
-        </div>
-    </div>
-
-   <script>
-const API="https://nonshrinkable-sumiko-unapprehendably.ngrok-free.dev/api";
-let token=localStorage.getItem("token");
-let user_id=localStorage.getItem("user_id");
-let conversation_id=null;
-
-if(!token||!user_id) window.location.href="/";
-
-
-/* Load chat list with delete buttons */
-async function loadChats() {
-    const res = await fetch(`${API}/chat_list`, {
+// ================= FULL UI FUNCTIONS =================
+async function loadChats(){
+    const r = await fetch(`${API}/chat_list`, {
         headers: { Authorization: `Bearer ${token}` }
     });
 
-    let list = await res.json();
+    const list = await r.json();
     chatList.innerHTML = "";
 
-    list.forEach(chat => {
-        let item = document.createElement("div");
-        item.className =
-            "flex justify-between items-center w-full bg-gray-800 hover:bg-gray-700 p-2 rounded";
-
-        // Chat open button
-        let b = document.createElement("button");
-        b.className = "text-left flex-1 truncate font-medium";
-
-        // If no title yet → display placeholder
-        b.textContent = chat.title || "New Chat";
-
-        b.onclick = () => openChat(chat.chat_id);
-
-        // Delete button
-        let del = document.createElement("button");
-        del.className =
-            "ml-2 hover:bg-red-700 px-2 py-1 rounded text-white text-xs";
-        del.textContent = "X";
-        del.onclick = async (e) => {
-            e.stopPropagation();
-            if (!confirm("Delete this chat permanently?")) return;
-
-            await fetch(`${API}/delete_chat/${chat.chat_id}`, {
-                method: "DELETE",
-                headers: { Authorization: `Bearer ${token}` }
-            });
-
-            item.remove();
-
-            if (conversation_id === chat.chat_id) {
-                messages.innerHTML = "";
-                currentChatID.textContent = "";
-                conversation_id = null;
-            }
-        };
-
-        item.appendChild(b);
-        item.appendChild(del);
-        chatList.appendChild(item);
+    list.forEach(c => {
+        chatList.innerHTML += `
+        <div class="flex justify-between bg-gray-800 p-2 rounded">
+            <button class="flex-1 text-left text-sm truncate" onclick="openChat('${c.chat_id}')">
+                ${c.title || "New Chat"}
+            </button>
+            <button onclick="deleteChat('${c.chat_id}')" class="bg-red-600 px-2 text-xs rounded">X</button>
+        </div>`;
     });
 }
 
-
-
-
-/* Create new chat */
 async function createNewChat(){
-    const r=await fetch(`${API}/new_chat`,{
-        method:"POST",
-        headers:{Authorization:`Bearer ${token}`}
+    const r = await fetch(`${API}/new_chat`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` }
     });
-    const d=await r.json();
-    conversation_id=d.chat_id;
-    messages.innerHTML="";
-    currentChatID.textContent = "Chat: " + conversation_id; 
+
+    const d = await r.json();
+    conversation_id = d.chat_id;
+
+    messages.innerHTML = "";
+    miniMsgs.innerHTML = "";
+    currentChatID.textContent = "Chat: " + conversation_id;
 
     loadChats();
 }
 
-/* Delete chat */
-async function deleteChat(){
-    if(!conversation_id) return alert("No chat selected");
-
-    if(!confirm("Delete this chat permanently?")) return;
-
-    const res = await fetch(`${API}/delete_chat/${conversation_id}`,{
-        method:"DELETE",
-        headers:{ Authorization:`Bearer ${token}` }
-    });
-
-    if(res.ok){
-        alert("Chat Deleted!");
-        conversation_id = null;
-        messages.innerHTML = "";
-        currentChatID.textContent = "";
-        loadChats();  // refresh sidebar
-    }
-}
-
-
-/* Fetch chat history */
 async function openChat(id){
-    conversation_id=id;
-    currentChatID.textContent="Chat: "+id.slice(0,12);
+    conversation_id = id;
+    currentChatID.textContent = "Chat: " + id.slice(0, 10);
 
-    const res=await fetch(`${API}/chat_history/${id}`,{
-        headers:{Authorization:`Bearer ${token}`}
+    const r = await fetch(`${API}/chat_history/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
     });
-    let chat=await res.json();
 
-    messages.innerHTML="";
-    const msgs = chat.messages || [];  
+    const data = await r.json();
+    messages.innerHTML = "";
 
-    msgs.forEach(m => {
-    let role = m.role || m.sender;
-    let text = m.content || m.text || "";
-    appendMsg(role, text, false);
-});
-
-    scrollMessages();
+    (data.messages || []).forEach(m => {
+        const role = m.role || m.sender || "assistant";
+        const text = m.content || m.text || "";
+        appendMsg(role, text);
+    });
 }
 
-/* Send message */
 async function sendMessage(){
     if(!conversation_id) await createNewChat();
 
-    let msg=msgInput.value.trim();
+    const msg = msgInput.value.trim();
     if(!msg) return;
 
-    appendMsg("user",msg,true);
-    msgInput.value="";
-    showTyping();   
-    // BLOCK HTML / JS input completely
-if (/<[^>]+>/g.test(msg)) {
-    appendMsg("assistant", " Invalid msg, Please write a correct medical query");
-    return;
-}
+    appendMsg("user", msg);
+    msgInput.value = "";
 
-    
-
-    const r=await fetch(`${API}/chat`,{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json",
-            Authorization:`Bearer ${token}`
+    const r = await fetch(`${API}/chat`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
         },
-        body:JSON.stringify({conversation_id,message:msg})
+        body: JSON.stringify({ conversation_id, message: msg })
     });
 
-    hideTyping();
-    const d=await r.json();
-    appendMsg("assistant",d.response);
+    const d = await r.json();
+    appendMsg("assistant", d.response);
+}
+
+async function deleteChat(id){
+    if(!confirm("Delete this chat permanently?")) return;
+
+    await fetch(`${API}/delete_chat/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if(conversation_id === id){
+        conversation_id = null;
+        messages.innerHTML = "";
+        miniMsgs.innerHTML = "";
+        currentChatID.textContent = "";
+    }
+
     loadChats();
 }
 
-/* UI helpers */
-function appendMsg(role, text, animate = true) {
-    const msg = document.createElement("div");
-    msg.className = `flex ${role === "user" ? "justify-end" : ""} ${animate ? "animate-fade" : ""}`;
-    
-    const b = document.createElement("div");
-    b.className = `p-3 max-w-xl rounded-xl shadow-md leading-relaxed whitespace-pre-line 
-                   ${role === "user" ? "bg-blue-600 text-white" : "bg-white border"}`;
+function appendMsg(role, text){
+    const wrap = document.createElement("div");
+    wrap.className = "msgWrap " + (role === "user" ? "msgUser" : "");
 
-    let clean = text
-        .replace(/<\/?[^>]+>/gi, "")
-        .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
-        .replace(/[•]/g, "\n• ")
-        .replace(/(\d\.)/g, "\n$1 ")
-        .trim();
+    const bubble = document.createElement("div");
+    bubble.className = "msgBubble " + (role === "user" ? "userMsg" : "botMsg");
 
-    b.innerHTML = clean.replace(/\n/g, "<br>");
-    msg.appendChild(b);
-    messages.appendChild(msg);
-    scrollMessages();
+    // 🚨 Block all HTML execution — convert <tags> to safe text
+    let safe = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+    // 🔥 Convert to markdown safely (ChatGPT-style formatting)
+    let formatted = marked.parse(safe);
+
+    // ⚡ Better readability like ChatGPT
+    formatted = formatted
+      .replace(/\n/g,"<br>")
+      .replace(/\*\*(.*?)\*\*/g,"<b>$1</b>")
+      .replace(/\*(.*?)\*/g,"<i>$1</i>")
+      .replace(/ - /g,"• ");  // bullet feel
+
+    bubble.innerHTML = formatted;
+    wrap.appendChild(bubble);
+    messages.appendChild(wrap);
+    messages.scrollTop = messages.scrollHeight;
 }
 
 
 
-function clearChat(){ messages.innerHTML=""; }
-function scrollMessages(){ setTimeout(()=>messages.scrollTop=messages.scrollHeight,80); }
-function showTyping(){ let t=document.createElement("div");t.id="typeBubble";t.className="p-2 bg-white border rounded-xl w-fit";t.innerHTML="...";messages.appendChild(t); }
-function hideTyping(){ let t=document.getElementById("typeBubble"); if(t) t.remove(); }
-
-function logout(){ localStorage.clear(); window.location.href="/"; }
-
-/* Speech Recognition */
-let recognition;
-let isRecording=false;
-
-function initSpeech(){
-    if(!("webkitSpeechRecognition" in window)){
-        alert("Browser doesn't support voice input.");
-        return;
-    }
-    recognition=new webkitSpeechRecognition();
-    recognition.lang="en-US";
-    recognition.onstart=()=>{isRecording=true;micBtn.classList.add("bg-green-600");};
-    recognition.onend=()=>{isRecording=false;micBtn.classList.remove("bg-green-600");};
-    recognition.onresult=e=>{msgInput.value=e.results[0][0].transcript;};
+// theme toggle
+function toggleTheme(){
+    document.body.classList.toggle("dark");
 }
 
-function toggleRecording(){
-    if(!recognition) initSpeech();
-    isRecording?recognition.stop():recognition.start();
-}
-/* Sidebar toggle*/
+// sidebar mobile
 function toggleSidebar(){
-    document.getElementById("sidebar").classList.toggle("hidden");
+    sidebar.classList.toggle("hidden");
 }
-
-loadChats();
 </script>
 
 </body>
