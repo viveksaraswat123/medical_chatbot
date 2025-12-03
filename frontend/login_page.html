@@ -4,29 +4,48 @@
 <meta charset="UTF-8" />
 <title>MediBot - Login</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center h-screen">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen px-4">
 
-<div class="bg-white shadow-xl rounded-lg p-8 w-96">
-    <h2 class="text-2xl font-bold text-center mb-4">MediBot Login</h2>
+<div class="bg-white shadow-xl rounded-lg p-6 sm:p-8 w-full max-w-sm">
+    <h2 class="text-3xl font-bold text-center mb-6">MediBot Login</h2>
 
-    <input id="email" type="email" placeholder="Email"
-        class="w-full p-2 border rounded mb-3" />
+    <!-- Email -->
+    <input 
+        id="email" 
+        type="email" 
+        placeholder="Email"
+        class="w-full p-3 border rounded mb-4 text-sm sm:text-base focus:ring-2 focus:ring-blue-500"
+    />
 
-    <input id="password" type="password" placeholder="Password"
-        class="w-full p-2 border rounded mb-5" />
+    <!-- Password -->
+    <input 
+        id="password" 
+        type="password" 
+        placeholder="Password"
+        class="w-full p-3 border rounded mb-6 text-sm sm:text-base focus:ring-2 focus:ring-blue-500"
+    />
 
-    <button onclick="login()"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white p-2 rounded">
+    <!-- Login Button -->
+    <button 
+        onclick="login()"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded text-sm sm:text-base font-semibold"
+    >
         Login
     </button>
 
-    <p class="text-center mt-3 text-sm">
-        New User? <a href="/signup" class="text-blue-600 font-semibold">Signup</a>
+    <!-- Signup Link -->
+    <p class="text-center mt-4 text-sm">
+        New User? 
+        <a href="/signup" class="text-blue-600 font-semibold hover:underline">
+            Signup
+        </a>
     </p>
 
-    <p id="msg" class="text-center text-red-500 mt-3"></p>
+    <!-- Message -->
+    <p id="msg" class="text-center text-red-500 mt-3 text-sm"></p>
 </div>
 
 <script src="static/auth.js"></script>
