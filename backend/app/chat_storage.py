@@ -3,16 +3,14 @@ from datetime import datetime
 from fastapi import HTTPException
 from .db import chats    # MongoDB collection
 
-# CREATE NEW CHAT
+#fucntion to create new chat
 def start_chat(user_id):
     chat_id = str(uuid.uuid4())
 
     chats.insert_one({
         "chat_id": chat_id,
         "user_id": user_id,
-
         "title": None,
-
         "messages": [],
         "created_at": datetime.utcnow(),
         "updated_at": datetime.utcnow()
@@ -39,7 +37,7 @@ def save_msg(chat_id, role, content):
         raise HTTPException(404, "Chat not found")
 
 
-# GET FULL CHAT HISTORY
+#get chat history
 def get_chat_history(chat_id, user_id):
     chat = chats.find_one({"chat_id": chat_id, "user_id": user_id})
     if not chat:
@@ -63,12 +61,7 @@ def get_chat_history(chat_id, user_id):
         "updated_at": chat["updated_at"]
     }
 
-
-
-
-
-
-# LIST ALL USER CHATS
+#list all user chats
 def list_user_chats(user_id):
     result = list(chats.find({"user_id": user_id}))
     for c in result:

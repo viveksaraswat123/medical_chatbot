@@ -15,5 +15,6 @@ sentence-transformers
 huggingface_hub
 markdown
 bcrypt 
-pymongo 
+pymongo
 python-jose
+langchain-huggingface

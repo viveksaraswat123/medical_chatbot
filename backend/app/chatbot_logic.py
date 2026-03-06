@@ -9,7 +9,6 @@ def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
 
-
 def get_chatbot_response(conversation_id: str, user_query: str, chat_history: str = ""):
 
     retriever = get_retriever()
