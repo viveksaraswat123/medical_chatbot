@@ -18,3 +18,4 @@ bcrypt
 pymongo
 python-jose
 langchain-huggingface
+certifi
