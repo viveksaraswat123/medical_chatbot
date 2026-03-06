@@ -82,14 +82,10 @@ app.add_middleware(
     allow_headers=["Authorization", "Content-Type"],
 )
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
 
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-FRONTEND_DIR = os.path.join(PROJECT_ROOT, "frontend")
-FRONTEND_STATIC = os.path.join(FRONTEND_DIR, "static")
-STATIC_SERVE_DIR = FRONTEND_STATIC if os.path.isdir(FRONTEND_STATIC) else FRONTEND_DIR
-
-app.mount("/static", StaticFiles(directory=STATIC_SERVE_DIR), name="static")
-
+app.mount("/static", StaticFiles(directory=os.path.join(FRONTEND_DIR, "static")), name="static")
 
 # frontend routes
 @app.get("/", include_in_schema=False)
