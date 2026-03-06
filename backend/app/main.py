@@ -1,27 +1,40 @@
 import os
-import uvicorn
 import logging
 from logging.config import dictConfig
 from fastapi import FastAPI, HTTPException, Header, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from dotenv import load_dotenv
-from fastapi import Depends
-from .auth import signup, login, verify_token
-from .chat_storage import start_chat, save_msg, get_chat_history, list_user_chats
-from .chatbot_logic import get_chatbot_response, generate_chat_title
-from .db import chats
 
+from .auth import signup, login, verify_token
+from .chat_storage import (
+    start_chat,
+    save_msg,
+    get_chat_history,
+    list_user_chats,
+    set_chat_title
+)
+from .chatbot_logic import get_chatbot_response, generate_chat_title
+from .db import chats, client
+
+
+# env
 ENV_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".env"))
 load_dotenv(ENV_PATH)
 
+
+# logging
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
-LOG_FILE = os.getenv("LOG_FILE", os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "logs", "medibot.log")))
+LOG_FILE = os.getenv(
+    "LOG_FILE",
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "logs", "medibot.log"))
+)
+
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 
-DICT_LOG_CONFIG = {
+dictConfig({
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
@@ -31,7 +44,11 @@ DICT_LOG_CONFIG = {
         }
     },
     "handlers": {
-        "console": {"class": "logging.StreamHandler", "level": LOG_LEVEL, "formatter": "default"},
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": LOG_LEVEL,
+            "formatter": "default",
+        },
         "file": {
             "class": "logging.handlers.RotatingFileHandler",
             "level": LOG_LEVEL,
@@ -42,47 +59,45 @@ DICT_LOG_CONFIG = {
             "encoding": "utf8",
         },
     },
-    "root": {"handlers": ["console", "file"], "level": LOG_LEVEL}
-}
-dictConfig(DICT_LOG_CONFIG)
+    "root": {"handlers": ["console", "file"], "level": LOG_LEVEL},
+})
+
 logger = logging.getLogger("medibot")
+
 
 app = FastAPI(title="MediBot API", version="1.0.0")
 
-origins = [
-    "http://127.0.0.1:8000",
-    "http://localhost:8000",
-    "http://127.0.0.1:5500",
-    "http://localhost:5500",
-]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=[
+        "http://127.0.0.1:8000",
+        "http://localhost:8000",
+        "http://127.0.0.1:5500",
+        "http://localhost:5500",
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "DELETE"],
+    allow_headers=["Authorization", "Content-Type"],
 )
 
-# FRONTEND / STATIC
+
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 FRONTEND_DIR = os.path.join(PROJECT_ROOT, "frontend")
-FRONTEND_STATIC_DIR = os.path.join(FRONTEND_DIR, "static")
-STATIC_SERVE_DIR = FRONTEND_STATIC_DIR if os.path.isdir(FRONTEND_STATIC_DIR) else FRONTEND_DIR
+FRONTEND_STATIC = os.path.join(FRONTEND_DIR, "static")
+STATIC_SERVE_DIR = FRONTEND_STATIC if os.path.isdir(FRONTEND_STATIC) else FRONTEND_DIR
+
 app.mount("/static", StaticFiles(directory=STATIC_SERVE_DIR), name="static")
 
 
+# frontend routes
 @app.get("/", include_in_schema=False)
 async def read_index():
-    return FileResponse(os.path.join(FRONTEND_DIR, "login_page.html"))
+    return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
 
 
 @app.get("/login", include_in_schema=False)
 async def read_login():
-    # file is named login_page.html in repo
-    login_path = os.path.join(FRONTEND_DIR, "login_page.html")
-    if os.path.exists(login_path):
-        return FileResponse(login_path)
     return FileResponse(os.path.join(FRONTEND_DIR, "login_page.html"))
 
 
@@ -92,7 +107,7 @@ async def read_signup():
 
 
 @app.get("/homepage", include_in_schema=False)
-async def read_signup():
+async def read_homepage():
     return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
 
 
@@ -100,109 +115,169 @@ async def read_signup():
 async def read_chat():
     return FileResponse(os.path.join(FRONTEND_DIR, "chat.html"))
 
+
+# schemas
 class SignupRequest(BaseModel):
     name: str
     email: str
     password: str
 
+
 class LoginRequest(BaseModel):
     email: str
     password: str
+
 
 class ChatRequest(BaseModel):
     conversation_id: str
     message: str
 
+    @field_validator("message")
+    @classmethod
+    def validate_message(cls, v: str) -> str:
+        v = v.strip()
+        if not v:
+            raise ValueError("Message cannot be empty")
+        if len(v) > 2000:
+            raise ValueError("Message too long (max 2000 characters)")
+        return v
 
-def get_current_user(authorization: str = Header(None)):
+
+# auth dependency
+def get_current_user(authorization: str = Header(None)) -> dict:
     if not authorization:
         raise HTTPException(status_code=401, detail="Missing Authorization header")
+
     parts = authorization.split()
+
     if len(parts) != 2 or parts[0].lower() != "bearer":
         raise HTTPException(status_code=401, detail="Invalid Authorization header")
-    token = parts[1]
-    payload = verify_token(token)
+
+    payload = verify_token(parts[1])
+
     if not payload:
         raise HTTPException(status_code=401, detail="Invalid or expired token")
+
     return payload
 
 
-#signup
+# auth endpoints
 @app.post("/api/signup")
 def register(req: SignupRequest):
+    logger.info("Signup attempt email=%s", req.email)
     return signup(req.name, req.email, req.password)
 
-#login api
+
 @app.post("/api/login")
 def user_login(req: LoginRequest):
+    logger.info("Login attempt email=%s", req.email)
     return login(req.email, req.password)
 
-#new_chat api
+
+# new chat
 @app.post("/api/new_chat")
 def new_chat(current_user: dict = Depends(get_current_user)):
-    user_id = current_user.get("user_id")
+    user_id = current_user["user_id"]
     chat_id = start_chat(user_id)
-    logger.info("New chat created %s for user %s", chat_id, user_id)
+
+    logger.info("New chat created chat_id=%s user_id=%s", chat_id, user_id)
+
     return {"chat_id": chat_id}
 
 
-#api for chat
 @app.post("/api/chat")
 def chat(req: ChatRequest, current_user: dict = Depends(get_current_user)):
+
+    user_id = current_user["user_id"]
+
+    chat_doc = get_chat_history(req.conversation_id, user_id)
+
+    if not chat_doc:
+        raise HTTPException(status_code=404, detail="Chat not found or access denied")
+
+    # generate title for first message
+    if not chat_doc.get("title"):
+        title = generate_chat_title(req.message)
+        set_chat_title(req.conversation_id, title)
+    else:
+        title = chat_doc["title"]
+
+    history = chat_doc.get("messages", [])[-10:]
+
+    formatted_history = "\n".join(
+        f"{m['role']}: {m['content']}" for m in history
+    )
+
+    save_msg(req.conversation_id, "user", req.message)
+
     try:
-        user_id = current_user.get("user_id")
-        chat = get_chat_history(req.conversation_id, user_id)
+        response = get_chatbot_response(
+            req.conversation_id,
+            req.message,
+            formatted_history
+        )
 
-        if not chat.get("title"): 
-            title = generate_chat_title(req.message)
+        if isinstance(response, tuple):
+            response = response[0]
 
-            chats.update_one(
-                {"chat_id": req.conversation_id},
-                {"$set": {"title": title}}
-            )
-        else:
-            title = chat["title"]
+    except Exception:
+        logger.exception("LLM call failed conversation_id=%s", req.conversation_id)
+        raise HTTPException(status_code=500, detail="Failed to generate response")
 
-        response = get_chatbot_response(req.conversation_id, req.message)
-        if isinstance(response, tuple): response = response[0]
+    save_msg(req.conversation_id, "assistant", response)
 
-        save_msg(req.conversation_id, "user", req.message)
-        save_msg(req.conversation_id, "assistant", response)
+    logger.info(
+        "Chat response sent conversation_id=%s user_id=%s",
+        req.conversation_id,
+        user_id
+    )
 
-        return {
-            "chat_id": req.conversation_id,
-            "title": title,
-            "response": response
-        }
+    return {
+        "chat_id": req.conversation_id,
+        "title": title,
+        "response": response,
+    }
 
-    except Exception as e:
-        logger.exception(f"Chat failure: {e}")
-        raise HTTPException(status_code=500, detail="Chat Failure")
 
 @app.get("/api/chat_list")
 def get_chat_list(current_user: dict = Depends(get_current_user)):
-    user_id = current_user.get("user_id")
-    return list_user_chats(user_id)
+    return list_user_chats(current_user["user_id"])
 
 
 @app.get("/api/chat_history/{chat_id}")
 def api_chat_history(chat_id: str, current_user: dict = Depends(get_current_user)):
-    user_id = current_user.get("user_id")
-    chat = get_chat_history(chat_id, user_id)
-    return chat  # <-- return entire chat, not just messages
+
+    user_id = current_user["user_id"]
+
+    chat_doc = get_chat_history(chat_id, user_id)
+
+    if not chat_doc:
+        raise HTTPException(status_code=404, detail="Chat not found or access denied")
+
+    return chat_doc
 
 
 @app.delete("/api/delete_chat/{chat_id}")
 def delete_chat(chat_id: str, current_user: dict = Depends(get_current_user)):
-    user_id = current_user.get("user_id")
 
-    result = chats.delete_one({"chat_id": chat_id, "user_id": user_id})
+    result = chats.delete_one({
+        "chat_id": chat_id,
+        "user_id": current_user["user_id"]
+    })
 
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Chat not found")
 
     return {"status": "success", "message": "Chat deleted successfully"}
 
+
+# health check
 @app.get("/api/health")
 def health_check():
-    return {"status": "ok"}
+
+    try:
+        client.admin.command("ping")
+        return {"status": "ok", "db": "connected"}
+
+    except Exception:
+        raise HTTPException(status_code=503, detail="Database unavailable")

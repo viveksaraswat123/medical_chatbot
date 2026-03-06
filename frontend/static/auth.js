@@ -1,7 +1,7 @@
-const API = "http://127.0.0.1:8000"; // or your deployed backend URL
+const API = "";
 
 async function login() {
-    const email = document.getElementById("email").value.trim();
+    const email    = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
 
     if (!email || !password) {
@@ -10,30 +10,29 @@ async function login() {
     }
 
     try {
-        const res = await fetch(`${API}/api/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-});
+        const res  = await fetch(`${API}/api/login`, {
+            method:  "POST",
+            headers: { "Content-Type": "application/json" },
+            body:    JSON.stringify({ email, password })
+        });
 
-// Check if response is JSON first
-let data;
-const text = await res.text();
-try {
-    data = JSON.parse(text);
-} catch {
-    console.error("Non-JSON response:", text);
-    document.getElementById("msg").textContent = "Server error: " + text;
-    return;
-}
+        let data;
+        const text = await res.text();
+        try {
+            data = JSON.parse(text);
+        } catch {
+            console.error("Non-JSON response:", text);
+            document.getElementById("msg").textContent = "Server error: " + text;
+            return;
+        }
 
-if (!res.ok || data.error) {
-    document.getElementById("msg").textContent = data.error || "Login failed.";
-    return;
-}
+        if (!res.ok || data.error) {
+            document.getElementById("msg").textContent = data.error || data.detail || "Login failed.";
+            return;
+        }
 
         localStorage.setItem("user_id", data.user_id);
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("token",   data.token);
 
         window.location.href = "/chat";
 
@@ -44,8 +43,8 @@ if (!res.ok || data.error) {
 }
 
 async function signup() {
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
+    const name     = document.getElementById("name").value.trim();
+    const email    = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
 
     if (!name || !email || !password) {
@@ -54,21 +53,21 @@ async function signup() {
     }
 
     try {
-        const res = await fetch(`${API}/api/signup`, {
-            method: "POST",
+        const res  = await fetch(`${API}/api/signup`, {
+            method:  "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, password })
+            body:    JSON.stringify({ name, email, password })
         });
 
         const data = await res.json();
 
         if (!res.ok || data.error) {
-            document.getElementById("msg").textContent = data.error || "Signup failed.";
+            document.getElementById("msg").textContent = data.error || data.detail || "Signup failed.";
             return;
         }
 
         localStorage.setItem("user_id", data.user_id);
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("token",   data.token);
 
         window.location.href = "/chat";
 
