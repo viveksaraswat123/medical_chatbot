@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from jose import jwt, JWTError
 from .db import users
 
-# Load secret from environment (set in backend/.env)
+#load secret from environment
 SECRET = os.getenv("SECRET_KEY", "SUPER_SECRET_KEY")
 ALGO = os.getenv("JWT_ALGORITHM", "HS256")
 

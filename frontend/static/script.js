@@ -4,10 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendBtn = document.getElementById('send-btn');
 
     let conversationId = null;
-    // Allow overriding API base URL from the page (useful in deployments).
-    // Defaults to a relative path so the frontend can be served from the same origin as the API.
-    // const API_BASE_URL = window.__API_BASE__ || '/api';
-    const API_BASE_URL = "https://nonshrinkable-sumiko-unapprehendably.ngrok-free.dev/api";
+    
+    const API_BASE_URL = "http://127.0.0.1:8000";
 
 
     // Disable UI until conversation is ready
@@ -18,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const startConversation = async () => {
         try {
             showLoading();
-            const response = await fetch(`${API_BASE_URL}/start_conversation`);
+            const response = await fetch(`${API_BASE_URL}/api/new_chat`);
             hideLoading();
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();

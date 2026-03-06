@@ -1,30 +1,696 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediBot - AI Medical Assistant</title>
-        <link rel="stylesheet" href="/static/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Medical Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
+  <style>
+    :root {
+      --sky:     #e8f4fd;
+      --sky-md:  #bde3f7;
+      --blue:    #2196c4;
+      --blue-dk: #1678a0;
+      --navy:    #0d2b3e;
+      --text:    #1e3a4a;
+      --muted:   #607d8b;
+      --border:  #daeaf4;
+      --white:   #ffffff;
+      --card-bg: #f4f9fd;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), #1aa3d4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+    }
+    .nav-logo span {
+      font-size: .95rem; font-weight: 700;
+      color: var(--navy); letter-spacing: -.01em;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 6px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: .88rem; font-weight: 500;
+      padding: 6px 12px; border-radius: 8px;
+      transition: color .2s, background .2s;
+    }
+    .nav-links a:hover { color: var(--blue); background: var(--sky); }
+
+    .nav-cta {
+      background: var(--blue);
+      color: white !important;
+      padding: 8px 18px !important;
+      border-radius: 10px !important;
+      font-weight: 600 !important;
+      transition: background .2s, transform .15s !important;
+      box-shadow: 0 3px 10px rgba(33,150,196,.3);
+    }
+    .nav-cta:hover {
+      background: var(--blue-dk) !important;
+      color: white !important;
+      transform: translateY(-1px);
+    }
+
+    .hamburger {
+      display: none; background: none; border: none;
+      cursor: pointer; padding: 6px;
+      flex-direction: column; gap: 5px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--navy); border-radius: 2px;
+      transition: .3s;
+    }
+
+    /* ── HERO ── */
+    #home {
+      min-height: calc(100vh - 64px);
+      background: linear-gradient(160deg, var(--sky) 0%, #ddf0fa 40%, var(--white) 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 80px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle decorative rings */
+    #home::before, #home::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(33,150,196,.1);
+      pointer-events: none;
+    }
+    #home::before {
+      width: 600px; height: 600px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #home::after {
+      width: 900px; height: 900px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 680px;
+      animation: fadeUp .7s cubic-bezier(.16,1,.3,1) both;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--blue);
+      font-size: .78rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 999px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(33,150,196,.12);
+      letter-spacing: .04em; text-transform: uppercase;
+    }
+    .hero-badge::before { content: '●'; font-size: 8px; }
+
+    .hero-inner h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.22;
+      margin-bottom: 18px;
+      letter-spacing: -.02em;
+    }
+    .hero-inner h1 em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-inner p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.75;
+    }
+
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white; border: none;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: .95rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 8px 24px rgba(33,150,196,.35);
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .btn-primary:hover {
+      background: var(--blue-dk);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(33,150,196,.4);
+    }
+
+    .hero-note {
+      margin-top: 20px;
+      font-size: .78rem;
+      color: var(--muted);
+      display: flex; align-items: center; gap: 6px;
+      justify-content: center;
+    }
+    .hero-note::before { content: '🎓'; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 80px 5%; }
+
+    .section-label {
+      display: inline-block;
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: .95rem;
+      max-width: 500px;
+      line-height: 1.7;
+    }
+
+    /* ── FEATURES ── */
+    #features { background: var(--white); }
+
+    .features-header { text-align: center; margin-bottom: 50px; }
+    .features-header .section-sub { margin: 0 auto; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px 24px;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(33,150,196,.1);
+      border-color: var(--sky-md);
+    }
+
+    .feature-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--sky), #c5e8f8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      font-size: 1rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: .86rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #how-it-works {
+      background: linear-gradient(160deg, var(--sky) 0%, #e8f6fc 100%);
+    }
+
+    .hiw-inner {
+      max-width: 960px; margin: 0 auto;
+    }
+
+    .hiw-header { margin-bottom: 48px; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      position: relative;
+    }
+
+    .step {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 30px 24px;
+      position: relative;
+      box-shadow: 0 2px 12px rgba(33,150,196,.06);
+    }
+
+    .step-num {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: white;
+      font-size: .9rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(33,150,196,.3);
+    }
+
+    .step h3 {
+      font-size: .98rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 8px;
+    }
+
+    .step p {
+      font-size: .86rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* connector arrow */
+    .step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -16px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--blue-dk);
+      font-size: 1.2rem;
+      opacity: .4;
+      z-index: 1;
+    }
+
+    /* ── DISCLAIMER ── */
+    #disclaimer {
+      padding: 48px 5%;
+      background: #fff8e8;
+      border-top: 1px solid #fde9a2;
+      border-bottom: 1px solid #fde9a2;
+    }
+
+    .disclaimer-inner {
+      max-width: 780px; margin: 0 auto;
+      display: flex; gap: 18px; align-items: flex-start;
+    }
+
+    .disclaimer-icon {
+      font-size: 28px; flex-shrink: 0; margin-top: 2px;
+    }
+
+    .disclaimer-inner h3 {
+      font-size: .95rem; font-weight: 700;
+      color: #92640a; margin-bottom: 6px;
+    }
+
+    .disclaimer-inner p {
+      font-size: .86rem;
+      color: #7a5510;
+      line-height: 1.7;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--white);
+    }
+
+    .about-inner {
+      max-width: 720px; margin: 0 auto; text-align: center;
+    }
+
+    .about-inner p {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .about-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center; margin-top: 24px;
+    }
+
+    .tag {
+      background: var(--sky);
+      color: var(--blue-dk);
+      font-size: .78rem; font-weight: 600;
+      padding: 5px 14px; border-radius: 999px;
+      letter-spacing: .02em;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      max-width: 600px; margin: 0 auto; text-align: center;
+    }
+
+    .contact-inner .section-sub { margin: 0 auto 28px; }
+
+    .contact-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+
+    .contact-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px;
+      background: var(--sky);
+      border-radius: 12px;
+    }
+
+    .contact-row-icon { font-size: 18px; flex-shrink: 0; }
+
+    .contact-row p {
+      font-size: .85rem; color: var(--muted); margin-bottom: 2px;
+    }
+    .contact-row a, .contact-row strong {
+      font-size: .92rem; color: var(--navy); font-weight: 600;
+      text-decoration: none;
+    }
+    .contact-row a:hover { color: var(--blue); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.55);
+      padding: 32px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .footer-logo-icon {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+    }
+    .footer-logo span {
+      font-size: .88rem; font-weight: 600;
+      color: rgba(255,255,255,.85);
+    }
+
+    .footer-links {
+      display: flex; gap: 20px; flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,.45);
+      text-decoration: none;
+      font-size: .8rem;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,.8); }
+
+    .footer-copy {
+      font-size: .78rem;
+      color: rgba(255,255,255,.3);
+    }
+
+    /* ── MOBILE NAV ── */
+    @media (max-width: 720px) {
+      .hamburger { display: flex; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px; left: 0; right: 0;
+        background: white;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 5%;
+        gap: 4px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 12px; border-radius: 10px; }
+
+      #home { padding: 60px 5%; min-height: auto; }
+      section { padding: 60px 5%; }
+
+      .step:not(:last-child)::after { display: none; }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+      }
+      .footer-links { justify-content: center; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .55s ease, transform .55s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
 </head>
 <body>
-    <div class="chat-container">
-        <header class="chat-header">
-            <h1>Medical Chatbot</h1>
-            <p class="disclaimer">AI Assistant</p>
-        </header>
-        <div class="chat-box" id="chat-box">
-            <!-- Messages will appear here -->
-        </div>
-        <footer class="chat-input">
-            <input type="text" id="user-input" placeholder="Ask a medical question...">
-            <button id="send-btn">Send</button>
-        </footer>
-    </div>
-    <script src="/static/script.js"></script>
-    
 
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-icon">🩺</div>
+    <span>AI Medical Assistant</span>
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="/login" class="nav-cta">Open Chatbot →</a></li>
+  </ul>
+
+  <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="home">
+  <div class="hero-inner">
+    <div class="hero-badge"> AI & Health</div>
+    <h1>AI-Powered <em>Medical</em><br>Assistance</h1>
+    <p>
+      Ask health-related questions and receive AI-generated guidance instantly.
+      Designed to help you understand symptoms, medications, and wellness topics
+      - anytime, anywhere.
+    </p>
+    <div class="hero-btns">
+      <a href="chatbot.html" class="btn-primary">
+        Start Chatbot <span>→</span>
+      </a>
+    </div>
+    <p class="hero-note">
+      
+    </p>
+  </div>
+</section>
+
+<!-- ══ FEATURES ══ -->
+<section id="features">
+  <div class="features-header reveal">
+    <span class="section-label">Features</span>
+    <h2 class="section-title">What this assistant can do</h2>
+    <p class="section-sub">Simple, reliable, and always available — here's what makes this chatbot useful.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">🔍</div>
+      <h3>Symptom Guidance</h3>
+      <p>Describe your symptoms and get a clear, easy-to-understand overview of possible causes and next steps.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🕐</div>
+      <h3>24/7 Availability</h3>
+      <p>No waiting rooms, no appointments. Get health information any time of day or night, instantly.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">✨</div>
+      <h3>Easy to Use</h3>
+      <p>Just type your question in plain language. No medical jargon required — the AI understands you.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">⚡</div>
+      <h3>Quick Responses</h3>
+      <p>Powered by a large language model, answers are generated in seconds so you never have to wait.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section id="how-it-works">
+  <div class="hiw-inner">
+    <div class="hiw-header reveal">
+      <span class="section-label">Process</span>
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-sub">Three simple steps from question to answer.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Enter Your Question</h3>
+        <p>Type any health-related question into the chatbot in plain, everyday language.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h3>AI Processes Your Query</h3>
+        <p>The AI analyzes your input using a trained medical knowledge base to generate a response.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h3>Receive Helpful Information</h3>
+        <p>Get a clear, structured answer with relevant guidance - displayed instantly in the chat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DISCLAIMER ══ -->
+<div id="disclaimer">
+  <div class="disclaimer-inner reveal">
+    <div class="disclaimer-icon">⚠️</div>
+    <div>
+      <h3>Educational Purposes Only</h3>
+      <p>
+        This chatbot is a student prototype built for academic demonstration. It does <strong>not</strong> provide
+        professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional
+        for any medical concerns. Do not rely on this tool in an emergency - call your local emergency services.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="about-inner reveal">
+    <span class="section-label">About</span>
+    <h2 class="section-title">About This Project</h2>
+    <p>
+      This AI Medical Assistant is a final-year college project exploring the intersection of
+      artificial intelligence and healthcare accessibility. The goal is to demonstrate how
+      conversational AI can help people access basic health information quickly and simply.
+    </p>
+    <p>
+      The chatbot is built using a large language model (LLM) with a custom medical knowledge
+      retrieval system (RAG), wrapped in a clean, responsive web interface.
+    </p>
+    <div class="about-tags">
+      <span class="tag">Python · FastAPI</span>
+      <span class="tag">LangChain · RAG</span>
+      <span class="tag">Groq LLM</span>
+      <span class="tag">HTML · CSS · JS</span>
+      <span class="tag">Student Project</span>
+    </div>
+  </div>
+</section>
+
+
+
+
+<script>
+  // Mobile nav toggle
+  function toggleNav() {
+    document.getElementById("navLinks").classList.toggle("open");
+  }
+
+  // Close nav on link click (mobile)
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      document.getElementById("navLinks").classList.remove("open");
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add("visible");
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+  // Stagger feature cards and steps
+  document.querySelectorAll(".feature-card, .step").forEach((el, i) => {
+    el.style.transitionDelay = (i * 80) + "ms";
+  });
+</script>
 </body>
 </html>

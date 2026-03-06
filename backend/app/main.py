@@ -49,10 +49,19 @@ logger = logging.getLogger("medibot")
 
 app = FastAPI(title="MediBot API", version="1.0.0")
 
+origins = [
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], allow_credentials=True,
-    allow_methods=["*"], allow_headers=["*"],
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # FRONTEND / STATIC
@@ -80,6 +89,11 @@ async def read_login():
 @app.get("/signup", include_in_schema=False)
 async def read_signup():
     return FileResponse(os.path.join(FRONTEND_DIR, "signup.html"))
+
+
+@app.get("/homepage", include_in_schema=False)
+async def read_signup():
+    return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
 
 
 @app.get("/chat", include_in_schema=False)

@@ -1,8 +1,5 @@
-const API = "https://nonshrinkable-sumiko-unapprehendably.ngrok-free.dev/api"; 
-// ↑ Change only when ngrok URL changes
+const API = "http://127.0.0.1:8000"; // or your deployed backend URL
 
-
-//login fucntion
 async function login() {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
@@ -13,24 +10,31 @@ async function login() {
     }
 
     try {
-        const res = await fetch(`${API}/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
-        });
+        const res = await fetch(`${API}/api/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+});
 
-        const data = await res.json();
+// Check if response is JSON first
+let data;
+const text = await res.text();
+try {
+    data = JSON.parse(text);
+} catch {
+    console.error("Non-JSON response:", text);
+    document.getElementById("msg").textContent = "Server error: " + text;
+    return;
+}
 
-        if (!res.ok || data.error) {
-            document.getElementById("msg").textContent = data.error || "Login failed.";
-            return;
-        }
+if (!res.ok || data.error) {
+    document.getElementById("msg").textContent = data.error || "Login failed.";
+    return;
+}
 
-        // Store token + user_id
         localStorage.setItem("user_id", data.user_id);
         localStorage.setItem("token", data.token);
 
-        // Redirect to chatbot
         window.location.href = "/chat";
 
     } catch (err) {
@@ -39,9 +43,6 @@ async function login() {
     }
 }
 
-
-
-//SIGNUP FUNCTION (Auto-Login & Redirect)
 async function signup() {
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
@@ -53,7 +54,7 @@ async function signup() {
     }
 
     try {
-        const res = await fetch(`${API}/signup`, {
+        const res = await fetch(`${API}/api/signup`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password })
@@ -66,12 +67,10 @@ async function signup() {
             return;
         }
 
-        // Auto-login after signup
         localStorage.setItem("user_id", data.user_id);
         localStorage.setItem("token", data.token);
 
-        // Redirect directly to chat
-        window.location.href = "/login";
+        window.location.href = "/chat";
 
     } catch (err) {
         console.error("Signup Error:", err);
