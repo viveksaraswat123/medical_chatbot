@@ -15,7 +15,7 @@ def _get_embeddings():
     global _embeddings
     if _embeddings is None:
         _embeddings = HuggingFaceEmbeddings(
-            model_name="BAAI/bge-base-en-v1.5",
+            model_name="BAAI/bge-small-en-v1.5",  # 33MB vs 400MB, same quality
             encode_kwargs={"normalize_embeddings": True}
         )
     return _embeddings
