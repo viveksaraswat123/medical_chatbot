@@ -1254,3 +1254,377 @@ AttributeError: 'VectorStoreRetriever' object has no attribute 'get_relevant_doc
 2026-03-09 13:25:27 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2026-03-09 13:25:27 | INFO    | medibot | Chat response sent conversation_id=b5385684-6c54-48fe-8e5c-c3c31be76cc5 user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
 2026-03-09 13:27:13 | INFO    | medibot | Login attempt email=viveksaraswat361@gmail.com
+2026-03-09 15:53:00 | INFO    | medibot | Login attempt email=viveksaraswat361@gmail.com
+2026-03-09 15:53:06 | INFO    | backend.app.chatbot_logic | conversation_id=a517c81e-9b69-4285-9f73-499de5714ccf | query_length=3
+2026-03-09 15:53:06 | INFO    | backend.app.chatbot_logic | Initialising retriever...
+2026-03-09 15:53:13 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2026-03-09 15:53:13 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-small-en-v1.5
+2026-03-09 15:53:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:14 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-09 15:53:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/modules.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:14 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/modules.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:14 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:15 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:15 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/README.md "HTTP/1.1 200 OK"
+2026-03-09 15:53:15 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/README.md "HTTP/1.1 200 OK"
+2026-03-09 15:53:15 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:15 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/modules.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:15 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:15 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:15 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:16 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-03-09 15:53:16 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:16 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:16 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:16 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-09 15:53:17 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5/xet-read-token/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a "HTTP/1.1 200 OK"
+2026-03-09 15:53:51 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:51 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:51 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:51 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:51 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:51 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-09 15:53:51 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-09 15:53:52 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/vocab.txt "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:52 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/vocab.txt "HTTP/1.1 200 OK"
+2026-03-09 15:53:52 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/vocab.txt "HTTP/1.1 200 OK"
+2026-03-09 15:53:52 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:52 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/tokenizer.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:52 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/tokenizer.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:53 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/added_tokens.json "HTTP/1.1 404 Not Found"
+2026-03-09 15:53:53 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/special_tokens_map.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:53 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/special_tokens_map.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:53 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/special_tokens_map.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:53 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/chat_template.jinja "HTTP/1.1 404 Not Found"
+2026-03-09 15:53:54 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 15:53:54 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:55 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-03-09 15:53:55 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5 "HTTP/1.1 200 OK"
+2026-03-09 15:53:55 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2026-03-09 15:53:56 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2026-03-09 15:53:56 | INFO    | backend.app.chatbot_logic | Initialising LLM...
+2026-03-09 15:53:59 | ERROR   | backend.app.chatbot_logic | LLM chain failed for conversation_id=a517c81e-9b69-4285-9f73-499de5714ccf
+Traceback (most recent call last):
+  File "D:\medical_chatbot\backend\app\chatbot_logic.py", line 206, in get_chatbot_response
+    response = chain.invoke(user_query)
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_core\runnables\base.py", line 3155, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_core\runnables\base.py", line 3882, in invoke
+    key: future.result()
+         ~~~~~~~~~~~~~^^
+  File "C:\Python313\Lib\concurrent\futures\_base.py", line 456, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_core\runnables\base.py", line 3865, in _invoke_step
+    return context.run(
+           ~~~~~~~~~~~^
+        step.invoke,
+        ^^^^^^^^^^^^
+        input_,
+        ^^^^^^^
+        child_config,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_core\runnables\base.py", line 3155, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_core\retrievers.py", line 222, in invoke
+    result = self._get_relevant_documents(
+        input, run_manager=run_manager, **kwargs_
+    )
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_core\vectorstores\base.py", line 1045, in _get_relevant_documents
+    docs = self.vectorstore.similarity_search(query, **kwargs_)
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_community\vectorstores\faiss.py", line 643, in similarity_search
+    docs_and_scores = self.similarity_search_with_score(
+        query, k, filter=filter, fetch_k=fetch_k, **kwargs
+    )
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_community\vectorstores\faiss.py", line 516, in similarity_search_with_score
+    docs = self.similarity_search_with_score_by_vector(
+        embedding,
+    ...<3 lines>...
+        **kwargs,
+    )
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_community\vectorstores\faiss.py", line 417, in similarity_search_with_score_by_vector
+    scores, indices = self.index.search(vector, k if filter is None else fetch_k)
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\medical_chatbot\myenv\Lib\site-packages\faiss\class_wrappers.py", line 383, in replacement_search
+    assert d == self.d
+           ^^^^^^^^^^^
+AssertionError
+2026-03-09 15:53:59 | INFO    | medibot | Chat response sent conversation_id=a517c81e-9b69-4285-9f73-499de5714ccf user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
+2026-03-09 15:59:21 | INFO    | backend.app.chatbot_logic | conversation_id=a517c81e-9b69-4285-9f73-499de5714ccf | query_length=3
+2026-03-09 15:59:21 | INFO    | backend.app.chatbot_logic | Initialising retriever...
+2026-03-09 15:59:21 | ERROR   | medibot | LLM call failed conversation_id=a517c81e-9b69-4285-9f73-499de5714ccf
+Traceback (most recent call last):
+  File "D:\medical_chatbot\backend\app\main.py", line 217, in chat
+    response = get_chatbot_response(
+        req.conversation_id,
+        req.message,
+        formatted_history
+    )
+  File "D:\medical_chatbot\backend\app\chatbot_logic.py", line 187, in get_chatbot_response
+    retriever = _get_retriever()
+  File "D:\medical_chatbot\backend\app\chatbot_logic.py", line 32, in _get_retriever
+    _retriever = get_retriever()
+  File "D:\medical_chatbot\backend\app\vector_store.py", line 37, in get_retriever
+    _get_embeddings(),
+    ~~~~~~~~~~~~~~~^^
+  File "D:\medical_chatbot\backend\app\vector_store.py", line 19, in _get_embeddings
+    _embeddings = HuggingFaceEmbeddings(
+        model_name="BAAI/bge-small-en-v1.5",
+        encode_kwargs={"normalize_embeddings": True},
+        query_instruction="Represent this sentence for searching relevant passages: "
+    )
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_huggingface\embeddings\huggingface.py", line 66, in __init__
+    super().__init__(**kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "D:\medical_chatbot\myenv\Lib\site-packages\pydantic\main.py", line 250, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for HuggingFaceEmbeddings
+query_instruction
+  Extra inputs are not permitted [type=extra_forbidden, input_value='Represent this sentence ...ing relevant passages: ', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/extra_forbidden
+2026-03-09 15:59:27 | INFO    | backend.app.chatbot_logic | conversation_id=a517c81e-9b69-4285-9f73-499de5714ccf | query_length=12
+2026-03-09 15:59:27 | INFO    | backend.app.chatbot_logic | Initialising retriever...
+2026-03-09 15:59:27 | ERROR   | medibot | LLM call failed conversation_id=a517c81e-9b69-4285-9f73-499de5714ccf
+Traceback (most recent call last):
+  File "D:\medical_chatbot\backend\app\main.py", line 217, in chat
+    response = get_chatbot_response(
+        req.conversation_id,
+        req.message,
+        formatted_history
+    )
+  File "D:\medical_chatbot\backend\app\chatbot_logic.py", line 187, in get_chatbot_response
+    retriever = _get_retriever()
+  File "D:\medical_chatbot\backend\app\chatbot_logic.py", line 32, in _get_retriever
+    _retriever = get_retriever()
+  File "D:\medical_chatbot\backend\app\vector_store.py", line 37, in get_retriever
+    _get_embeddings(),
+    ~~~~~~~~~~~~~~~^^
+  File "D:\medical_chatbot\backend\app\vector_store.py", line 19, in _get_embeddings
+    _embeddings = HuggingFaceEmbeddings(
+        model_name="BAAI/bge-small-en-v1.5",
+        encode_kwargs={"normalize_embeddings": True},
+        query_instruction="Represent this sentence for searching relevant passages: "
+    )
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_huggingface\embeddings\huggingface.py", line 66, in __init__
+    super().__init__(**kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "D:\medical_chatbot\myenv\Lib\site-packages\pydantic\main.py", line 250, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for HuggingFaceEmbeddings
+query_instruction
+  Extra inputs are not permitted [type=extra_forbidden, input_value='Represent this sentence ...ing relevant passages: ', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/extra_forbidden
+2026-03-09 15:59:32 | INFO    | medibot | Login attempt email=viveksaraswat361@gmail.com
+2026-03-09 15:59:34 | INFO    | medibot | New chat created chat_id=28c76329-cc66-44b1-85c2-a26d2b5765f7 user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
+2026-03-09 15:59:35 | INFO    | medibot | New chat created chat_id=5adfdb02-6a14-4dda-8d18-dd53899839fe user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
+2026-03-09 15:59:39 | INFO    | backend.app.chatbot_logic | Initialising LLM...
+2026-03-09 15:59:41 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-09 15:59:41 | INFO    | backend.app.chatbot_logic | conversation_id=5adfdb02-6a14-4dda-8d18-dd53899839fe | query_length=12
+2026-03-09 15:59:41 | INFO    | backend.app.chatbot_logic | Initialising retriever...
+2026-03-09 15:59:41 | ERROR   | medibot | LLM call failed conversation_id=5adfdb02-6a14-4dda-8d18-dd53899839fe
+Traceback (most recent call last):
+  File "D:\medical_chatbot\backend\app\main.py", line 217, in chat
+    response = get_chatbot_response(
+        req.conversation_id,
+        req.message,
+        formatted_history
+    )
+  File "D:\medical_chatbot\backend\app\chatbot_logic.py", line 187, in get_chatbot_response
+    retriever = _get_retriever()
+  File "D:\medical_chatbot\backend\app\chatbot_logic.py", line 32, in _get_retriever
+    _retriever = get_retriever()
+  File "D:\medical_chatbot\backend\app\vector_store.py", line 37, in get_retriever
+    _get_embeddings(),
+    ~~~~~~~~~~~~~~~^^
+  File "D:\medical_chatbot\backend\app\vector_store.py", line 19, in _get_embeddings
+    _embeddings = HuggingFaceEmbeddings(
+        model_name="BAAI/bge-small-en-v1.5",
+        encode_kwargs={"normalize_embeddings": True},
+        query_instruction="Represent this sentence for searching relevant passages: "
+    )
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_huggingface\embeddings\huggingface.py", line 66, in __init__
+    super().__init__(**kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "D:\medical_chatbot\myenv\Lib\site-packages\pydantic\main.py", line 250, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for HuggingFaceEmbeddings
+query_instruction
+  Extra inputs are not permitted [type=extra_forbidden, input_value='Represent this sentence ...ing relevant passages: ', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/extra_forbidden
+2026-03-09 16:01:00 | INFO    | medibot | Login attempt email=viveksaraswat361@gmail.com
+2026-03-09 16:01:02 | INFO    | medibot | New chat created chat_id=f81e9110-3cf7-4ae7-8145-cb09551201c2 user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
+2026-03-09 16:01:05 | INFO    | backend.app.chatbot_logic | Initialising LLM...
+2026-03-09 16:01:07 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-09 16:01:07 | INFO    | backend.app.chatbot_logic | conversation_id=f81e9110-3cf7-4ae7-8145-cb09551201c2 | query_length=3
+2026-03-09 16:01:07 | INFO    | backend.app.chatbot_logic | Initialising retriever...
+2026-03-09 16:01:12 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2026-03-09 16:01:12 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-small-en-v1.5
+2026-03-09 16:01:13 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:01:13 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/modules.json "HTTP/1.1 200 OK"
+2026-03-09 16:01:13 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:01:13 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-09 16:01:13 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:01:13 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-09 16:01:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:01:14 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-09 16:01:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/README.md "HTTP/1.1 200 OK"
+2026-03-09 16:01:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:01:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/modules.json "HTTP/1.1 200 OK"
+2026-03-09 16:01:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:01:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-03-09 16:01:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-03-09 16:01:15 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:01:15 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config.json "HTTP/1.1 200 OK"
+2026-03-09 16:01:15 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:01:15 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config.json "HTTP/1.1 200 OK"
+2026-03-09 16:01:16 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:01:16 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-09 16:01:16 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-09 16:01:16 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-09 16:01:17 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:01:17 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-03-09 16:01:17 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5 "HTTP/1.1 200 OK"
+2026-03-09 16:01:17 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2026-03-09 16:01:17 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2026-03-09 16:01:17 | ERROR   | backend.app.chatbot_logic | LLM chain failed for conversation_id=f81e9110-3cf7-4ae7-8145-cb09551201c2
+Traceback (most recent call last):
+  File "D:\medical_chatbot\backend\app\chatbot_logic.py", line 206, in get_chatbot_response
+    response = chain.invoke(user_query)
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_core\runnables\base.py", line 3155, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_core\runnables\base.py", line 3882, in invoke
+    key: future.result()
+         ~~~~~~~~~~~~~^^
+  File "C:\Python313\Lib\concurrent\futures\_base.py", line 456, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_core\runnables\base.py", line 3865, in _invoke_step
+    return context.run(
+           ~~~~~~~~~~~^
+        step.invoke,
+        ^^^^^^^^^^^^
+        input_,
+        ^^^^^^^
+        child_config,
+        ^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_core\runnables\base.py", line 3155, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_core\retrievers.py", line 222, in invoke
+    result = self._get_relevant_documents(
+        input, run_manager=run_manager, **kwargs_
+    )
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_core\vectorstores\base.py", line 1054, in _get_relevant_documents
+    docs = self.vectorstore.max_marginal_relevance_search(query, **kwargs_)
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_community\vectorstores\faiss.py", line 871, in max_marginal_relevance_search
+    docs = self.max_marginal_relevance_search_by_vector(
+        embedding,
+    ...<4 lines>...
+        **kwargs,
+    )
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_community\vectorstores\faiss.py", line 806, in max_marginal_relevance_search_by_vector
+    docs_and_scores = self.max_marginal_relevance_search_with_score_by_vector(
+        embedding, k=k, fetch_k=fetch_k, lambda_mult=lambda_mult, filter=filter
+    )
+  File "D:\medical_chatbot\myenv\Lib\site-packages\langchain_community\vectorstores\faiss.py", line 701, in max_marginal_relevance_search_with_score_by_vector
+    scores, indices = self.index.search(
+                      ~~~~~~~~~~~~~~~~~^
+        np.array([embedding], dtype=np.float32),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        fetch_k if filter is None else fetch_k * 2,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\medical_chatbot\myenv\Lib\site-packages\faiss\class_wrappers.py", line 383, in replacement_search
+    assert d == self.d
+           ^^^^^^^^^^^
+AssertionError
+2026-03-09 16:01:17 | INFO    | medibot | Chat response sent conversation_id=f81e9110-3cf7-4ae7-8145-cb09551201c2 user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
+2026-03-09 16:04:05 | INFO    | medibot | Login attempt email=viveksaraswat361@gmail.com
+2026-03-09 16:04:22 | INFO    | medibot | New chat created chat_id=94ff8580-be1f-4d21-97f7-aea3203a1780 user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
+2026-03-09 16:04:22 | INFO    | backend.app.chatbot_logic | Initialising LLM...
+2026-03-09 16:04:23 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-09 16:04:24 | INFO    | backend.app.chatbot_logic | conversation_id=94ff8580-be1f-4d21-97f7-aea3203a1780 | query_length=51
+2026-03-09 16:04:24 | INFO    | backend.app.chatbot_logic | Initialising retriever...
+2026-03-09 16:04:24 | ERROR   | medibot | LLM call failed conversation_id=94ff8580-be1f-4d21-97f7-aea3203a1780
+Traceback (most recent call last):
+  File "D:\medical_chatbot\backend\app\main.py", line 217, in chat
+    response = get_chatbot_response(
+        req.conversation_id,
+        req.message,
+        formatted_history
+    )
+  File "D:\medical_chatbot\backend\app\chatbot_logic.py", line 187, in get_chatbot_response
+    retriever = _get_retriever()
+  File "D:\medical_chatbot\backend\app\chatbot_logic.py", line 32, in _get_retriever
+    _retriever = get_retriever()
+  File "D:\medical_chatbot\backend\app\vector_store.py", line 34, in get_retriever
+    raise FileNotFoundError(f"Vector store not found at {VECTOR_STORE_PATH}")
+FileNotFoundError: Vector store not found at D:\medical_chatbot\backend\vector_store_db
+2026-03-09 16:10:50 | INFO    | medibot | Login attempt email=viveksaraswat361@gmail.com
+2026-03-09 16:10:53 | INFO    | medibot | New chat created chat_id=94ba12a0-2adf-4739-b816-378dfdc640bc user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
+2026-03-09 16:11:04 | INFO    | backend.app.chatbot_logic | Initialising LLM...
+2026-03-09 16:11:05 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-09 16:11:05 | INFO    | backend.app.chatbot_logic | conversation_id=94ba12a0-2adf-4739-b816-378dfdc640bc | query_length=35
+2026-03-09 16:11:05 | INFO    | backend.app.chatbot_logic | Initialising retriever...
+2026-03-09 16:11:10 | INFO    | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2026-03-09 16:11:10 | INFO    | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: BAAI/bge-small-en-v1.5
+2026-03-09 16:11:11 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:11:11 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/modules.json "HTTP/1.1 200 OK"
+2026-03-09 16:11:11 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:11:11 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-09 16:11:12 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:11:12 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-09 16:11:12 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:11:12 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-09 16:11:12 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/README.md "HTTP/1.1 200 OK"
+2026-03-09 16:11:12 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:11:12 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/modules.json "HTTP/1.1 200 OK"
+2026-03-09 16:11:13 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:11:13 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-03-09 16:11:13 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-03-09 16:11:13 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:11:13 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config.json "HTTP/1.1 200 OK"
+2026-03-09 16:11:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:11:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config.json "HTTP/1.1 200 OK"
+2026-03-09 16:11:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:11:14 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-09 16:11:14 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-09 16:11:15 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-09 16:11:15 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-09 16:11:15 | INFO    | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-03-09 16:11:15 | INFO    | httpx | HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5 "HTTP/1.1 200 OK"
+2026-03-09 16:11:15 | INFO    | faiss.loader | Loading faiss with AVX2 support.
+2026-03-09 16:11:15 | INFO    | faiss.loader | Successfully loaded faiss with AVX2 support.
+2026-03-09 16:11:16 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-09 16:11:16 | INFO    | medibot | Chat response sent conversation_id=94ba12a0-2adf-4739-b816-378dfdc640bc user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
+2026-03-09 16:11:31 | INFO    | backend.app.chatbot_logic | conversation_id=94ba12a0-2adf-4739-b816-378dfdc640bc | query_length=19
+2026-03-09 16:11:31 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-09 16:11:31 | INFO    | medibot | Chat response sent conversation_id=94ba12a0-2adf-4739-b816-378dfdc640bc user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
+2026-03-09 16:11:35 | INFO    | backend.app.chatbot_logic | conversation_id=94ba12a0-2adf-4739-b816-378dfdc640bc | query_length=3
+2026-03-09 16:11:35 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-09 16:11:35 | INFO    | medibot | Chat response sent conversation_id=94ba12a0-2adf-4739-b816-378dfdc640bc user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
+2026-03-09 16:11:37 | INFO    | backend.app.chatbot_logic | conversation_id=94ba12a0-2adf-4739-b816-378dfdc640bc | query_length=8
+2026-03-09 16:11:38 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-09 16:11:38 | INFO    | medibot | Chat response sent conversation_id=94ba12a0-2adf-4739-b816-378dfdc640bc user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
+2026-03-09 16:11:43 | INFO    | backend.app.chatbot_logic | conversation_id=94ba12a0-2adf-4739-b816-378dfdc640bc | query_length=16
+2026-03-09 16:11:43 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-09 16:11:43 | INFO    | medibot | Chat response sent conversation_id=94ba12a0-2adf-4739-b816-378dfdc640bc user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
+2026-03-09 16:11:46 | INFO    | backend.app.chatbot_logic | conversation_id=94ba12a0-2adf-4739-b816-378dfdc640bc | query_length=5
+2026-03-09 16:11:47 | INFO    | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-09 16:11:47 | INFO    | medibot | Chat response sent conversation_id=94ba12a0-2adf-4739-b816-378dfdc640bc user_id=b450cb62-c190-4ecb-bca5-f1ba56184b91
