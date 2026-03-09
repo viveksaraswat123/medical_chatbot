@@ -2,6 +2,7 @@ services:
   - type: web
     name: medibot-backend
     runtime: python
+    pythonVersion: "3.11.9"
     buildCommand: pip install -r backend/requirements.txt
     startCommand: PYTHONPATH=. uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
 
@@ -20,3 +21,5 @@ services:
         value: INFO
       - key: LOG_FILE
         value: /tmp/medibot.log
+      - key: VECTOR_STORE_PATH
+        value: /opt/render/project/src/backend/vector_store_db

@@ -1,59 +1,196 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>MediBot - Signup</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medibot – Sign up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #faf8f4;
+      --warm:  #f2ede4;
+      --ink:   #1c1a17;
+      --soft:  #6b6560;
+      --teal:  #2a7d6f;
+      --teal2: #1f5e54;
+      --line:  #e3ddd5;
+      --err:   #c0392b;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .top-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.1rem;
+      color: var(--soft);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 7px;
+      margin-bottom: 36px;
+      transition: color .2s;
+    }
+    .top-logo:hover { color: var(--ink); }
+    .logo-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 380px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 40px 36px;
+      animation: fadeUp .4s cubic-bezier(.16,1,.3,1) both;
+    }
+
+    .card-head {
+      margin-bottom: 28px;
+    }
+    .card-head h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.7rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 5px;
+    }
+    .card-head p {
+      font-size: .83rem;
+      color: var(--soft);
+      font-weight: 300;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+    .field label {
+      display: block;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--soft);
+      letter-spacing: .03em;
+      margin-bottom: 6px;
+    }
+    .field input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      color: var(--ink);
+      background: var(--cream);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .field input::placeholder { color: #b5afa8; }
+    .field input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(42,125,111,.1);
+      background: white;
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 8px;
+      padding: 12px;
+      background: var(--teal);
+      color: white;
+      border: none;
+      border-radius: 9px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn:hover {
+      background: var(--teal2);
+      transform: translateY(-1px);
+    }
+    .btn:active { transform: none; }
+
+    .msg {
+      font-size: .8rem;
+      text-align: center;
+      margin-top: 12px;
+      min-height: 18px;
+      color: var(--err);
+      font-weight: 300;
+    }
+    .msg.success { color: var(--teal); }
+
+    .card-foot {
+      text-align: center;
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      font-size: .82rem;
+      color: var(--soft);
+      font-weight: 300;
+    }
+    .card-foot a {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .card-foot a:hover { text-decoration: underline; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
+<body>
 
-<body class="bg-gray-100 flex items-center justify-center min-h-screen px-4">
+  <a href="/" class="top-logo">
+    <div class="logo-dot"></div>
+    Medibot
+  </a>
 
-<div class="bg-white shadow-xl rounded-lg p-6 sm:p-8 w-full max-w-sm">
-    <h2 class="text-3xl font-bold text-center mb-6">Create Account</h2>
+  <div class="card">
+    <div class="card-head">
+      <h1>Create an account</h1>
+      <p>Takes less than a minute to get started</p>
+    </div>
 
-    <!-- Full Name -->
-    <input 
-        id="name" 
-        type="text" 
-        placeholder="Full Name"
-        class="w-full p-3 border rounded mb-4 text-sm sm:text-base focus:ring-2 focus:ring-blue-500"
-    />
+    <div class="field">
+      <label for="name">Full name</label>
+      <input id="name" type="text" placeholder="Vivek Saraswat" />
+    </div>
 
-    <!-- Email -->
-    <input 
-        id="email" 
-        type="email" 
-        placeholder="Email"
-        class="w-full p-3 border rounded mb-4 text-sm sm:text-base focus:ring-2 focus:ring-blue-500"
-    />
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="you@example.com" />
+    </div>
 
-    <!-- Password -->
-    <input 
-        id="password" 
-        type="password" 
-        placeholder="Password"
-        class="w-full p-3 border rounded mb-6 text-sm sm:text-base focus:ring-2 focus:ring-blue-500"
-    />
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="••••••••" />
+    </div>
 
-    <!-- Signup Button -->
-    <button 
-        onclick="signup()"
-        class="w-full bg-green-600 hover:bg-green-700 text-white p-3 rounded text-sm sm:text-base font-semibold"
-    >
-        Create Account
-    </button>
+    <button class="btn" onclick="signup()">Create account</button>
 
-    <!-- Login Link -->
-    <p class="text-center mt-4 text-sm">
-        Already have an account?
-        <a href="/login" class="text-blue-600 font-semibold hover:underline">
-            Login
-        </a>
-    </p>
+    <p id="msg" class="msg"></p>
 
-    <p id="msg" class="text-center text-red-500 mt-3 text-sm"></p>
-</div>
+    <div class="card-foot">
+      Already have an account? <a href="/login">Sign in</a>
+    </div>
+  </div>
 
 <script src="static/auth.js"></script>
 </body>
