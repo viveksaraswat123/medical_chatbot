@@ -16,5 +16,6 @@ python-multipart
 pymongo
 certifi
 bcrypt
+slowapi
 python-jose
 markdown
