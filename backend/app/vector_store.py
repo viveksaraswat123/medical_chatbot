@@ -19,6 +19,7 @@ def _get_embeddings():
     if _embeddings is None:
         _embeddings = HuggingFaceEmbeddings(
             model_name="BAAI/bge-small-en-v1.5",
+            cache_folder="./hf_cache",
             encode_kwargs={"normalize_embeddings": True}
         )
 

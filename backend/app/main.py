@@ -3,7 +3,7 @@ import uvicorn
 import logging
 from logging.config import dictConfig
 from dotenv import load_dotenv
-
+import threading
 ENV_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".env"))
 load_dotenv(ENV_PATH)
 
@@ -11,7 +11,7 @@ from fastapi import FastAPI, HTTPException, Header, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, field_validator, EmailStr, Field
+from pydantic import BaseModel, field_validator, EmailStr
 
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -73,6 +73,7 @@ logger = logging.getLogger("medibot")
 
 app = FastAPI(title="MediBot API", version="1.0.0")
 
+
 limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
@@ -98,6 +99,13 @@ static_dir = os.path.join(FRONTEND_DIR, "static")
 
 if os.path.exists(static_dir):
     app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
+
+
+@app.on_event("startup")
+def preload_rag():
+    from app.chatbot_logic import _get_chain
+    threading.Thread(target=_get_chain).start()
 
 @app.get("/", include_in_schema=False)
 async def read_index():

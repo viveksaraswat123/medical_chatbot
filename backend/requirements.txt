@@ -19,3 +19,5 @@ bcrypt
 slowapi
 python-jose
 markdown
+pydantic[email]
+email-validator
