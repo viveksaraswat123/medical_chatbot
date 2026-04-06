@@ -7,11 +7,11 @@ from dotenv import load_dotenv
 ENV_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".env"))
 load_dotenv(ENV_PATH)
 
-from fastapi import FastAPI, HTTPException, Header, Depends, Request
+from fastapi import FastAPI, HTTPException, Header, Depends, Request, Field
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, field_validator, EmailStr
 
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -117,26 +117,52 @@ async def read_signup():
 async def read_chat():
     return FileResponse(os.path.join(FRONTEND_DIR, "chat.html"))
 
-BLOCKED_TOPICS = [
-    "suicide",
-    "self harm",
-    "kill myself"
+BLOCKED_PATTERNS = [
+    "i want to kill myself",
+    "i want to end my life",
+    "i am going to kill myself",
+    "how to commit suicide",
+    "how to hurt myself",
+    "how to cut myself",
 ]
 
 def is_safe_message(message: str) -> bool:
     msg = message.lower()
-    for topic in BLOCKED_TOPICS:
-        if topic in msg:
+    for pattern in BLOCKED_PATTERNS:
+        if pattern in msg:
             return False
     return True
 
+
 class SignupRequest(BaseModel):
     name: str
-    email: str
+    email: EmailStr
     password: str
 
+    @field_validator("name")
+    @classmethod
+    def validate_name(cls, v: str) -> str:
+        v = v.strip()
+        if not v:
+            raise ValueError("Name cannot be empty")
+        if len(v) > 100:
+            raise ValueError("Name too long")
+        return v
+
+    @field_validator("password")
+    @classmethod
+    def validate_password(cls, v: str) -> str:
+        if len(v) < 8:
+            raise ValueError("Password must be at least 8 characters")
+        if not any(c.isupper() for c in v):
+            raise ValueError("Password must contain at least one uppercase letter")
+        if not any(c.isdigit() for c in v):
+            raise ValueError("Password must contain at least one digit")
+        return v
+
+
 class LoginRequest(BaseModel):
-    email: str
+    email: EmailStr
     password: str
 
 class ChatRequest(BaseModel):
@@ -155,27 +181,29 @@ class ChatRequest(BaseModel):
 
 def get_current_user(authorization: str = Header(None)):
     if not authorization:
-        raise HTTPException(status_code=401, detail="Missing Authorization header")
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
     parts = authorization.split()
 
     if len(parts) != 2 or parts[0].lower() != "bearer":
-        raise HTTPException(status_code=401, detail="Invalid Authorization header")
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
     payload = verify_token(parts[1])
 
     if not payload:
-        raise HTTPException(status_code=401, detail="Invalid or expired token")
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
     return payload
 
 @app.post("/api/signup")
-def register(req: SignupRequest):
+@limiter.limit("5/minute")
+def register(request: Request, req: SignupRequest):
     logger.info("Signup attempt email=%s", req.email)
     return signup(req.name, req.email, req.password)
 
 @app.post("/api/login")
-def user_login(req: LoginRequest):
+@limiter.limit("5/minute")
+def user_login(request: Request, req: LoginRequest):
     logger.info("Login attempt email=%s", req.email)
     return login(req.email, req.password)
 
@@ -192,7 +220,7 @@ def chat(request: Request, req: ChatRequest, current_user: dict = Depends(get_cu
     user_id = current_user["user_id"]
 
     if not is_safe_message(req.message):
-        return {"response": "Please consult a medical professional for serious concerns."}
+        return {"response": "Please consult a medical professional or a mental health helpline for serious concerns."}
 
     chat_doc = get_chat_history(req.conversation_id, user_id)
 
@@ -211,6 +239,8 @@ def chat(request: Request, req: ChatRequest, current_user: dict = Depends(get_cu
         f"{m['role']}: {m['content']}" for m in history
     )
 
+    formatted_history += f"\nuser: {req.message}"
+
     save_msg(req.conversation_id, "user", req.message)
 
     try:
@@ -220,8 +250,8 @@ def chat(request: Request, req: ChatRequest, current_user: dict = Depends(get_cu
             formatted_history
         )
 
-        if isinstance(response, tuple):
-            response = response[0]
+        if not isinstance(response, str):
+            response = str(response)
 
     except Exception:
         logger.exception("LLM call failed conversation_id=%s", req.conversation_id)
@@ -279,6 +309,7 @@ def health_check():
             "db": "connected"
         }
     except Exception:
+        logger.exception("Database health check failed")
         raise HTTPException(status_code=503, detail="Database unavailable")
 
 if __name__ == "__main__":
