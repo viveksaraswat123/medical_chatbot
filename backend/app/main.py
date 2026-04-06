@@ -7,11 +7,11 @@ from dotenv import load_dotenv
 ENV_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".env"))
 load_dotenv(ENV_PATH)
 
-from fastapi import FastAPI, HTTPException, Header, Depends, Request, Field
+from fastapi import FastAPI, HTTPException, Header, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, field_validator, EmailStr
+from pydantic import BaseModel, field_validator, EmailStr, Field
 
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -74,7 +74,6 @@ logger = logging.getLogger("medibot")
 app = FastAPI(title="MediBot API", version="1.0.0")
 
 limiter = Limiter(key_func=get_remote_address)
-
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(SlowAPIMiddleware)
@@ -95,7 +94,6 @@ app.add_middleware(
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
-
 static_dir = os.path.join(FRONTEND_DIR, "static")
 
 if os.path.exists(static_dir):
@@ -165,6 +163,7 @@ class LoginRequest(BaseModel):
     email: EmailStr
     password: str
 
+
 class ChatRequest(BaseModel):
     conversation_id: str
     message: str
@@ -179,21 +178,18 @@ class ChatRequest(BaseModel):
             raise ValueError("Message too long")
         return v
 
+
 def get_current_user(authorization: str = Header(None)):
     if not authorization:
         raise HTTPException(status_code=401, detail="Unauthorized")
-
     parts = authorization.split()
-
     if len(parts) != 2 or parts[0].lower() != "bearer":
         raise HTTPException(status_code=401, detail="Unauthorized")
-
     payload = verify_token(parts[1])
-
     if not payload:
         raise HTTPException(status_code=401, detail="Unauthorized")
-
     return payload
+
 
 @app.post("/api/signup")
 @limiter.limit("5/minute")
@@ -201,11 +197,13 @@ def register(request: Request, req: SignupRequest):
     logger.info("Signup attempt email=%s", req.email)
     return signup(req.name, req.email, req.password)
 
+
 @app.post("/api/login")
 @limiter.limit("5/minute")
 def user_login(request: Request, req: LoginRequest):
     logger.info("Login attempt email=%s", req.email)
     return login(req.email, req.password)
+
 
 @app.post("/api/new_chat")
 def new_chat(current_user: dict = Depends(get_current_user)):
@@ -213,6 +211,7 @@ def new_chat(current_user: dict = Depends(get_current_user)):
     chat_id = start_chat(user_id)
     logger.info("New chat created chat_id=%s user_id=%s", chat_id, user_id)
     return {"chat_id": chat_id}
+
 
 @app.post("/api/chat")
 @limiter.limit("10/minute")
@@ -234,12 +233,9 @@ def chat(request: Request, req: ChatRequest, current_user: dict = Depends(get_cu
         title = chat_doc["title"]
 
     history = chat_doc.get("messages", [])[-10:]
-
     formatted_history = "\n".join(
         f"{m['role']}: {m['content']}" for m in history
     )
-
-    formatted_history += f"\nuser: {req.message}"
 
     save_msg(req.conversation_id, "user", req.message)
 
@@ -249,10 +245,8 @@ def chat(request: Request, req: ChatRequest, current_user: dict = Depends(get_cu
             req.message,
             formatted_history
         )
-
         if not isinstance(response, str):
             response = str(response)
-
     except Exception:
         logger.exception("LLM call failed conversation_id=%s", req.conversation_id)
         raise HTTPException(status_code=500, detail="Failed to generate response")
@@ -271,19 +265,20 @@ def chat(request: Request, req: ChatRequest, current_user: dict = Depends(get_cu
         "response": response
     }
 
+
 @app.get("/api/chat_list")
 def get_chat_list(current_user: dict = Depends(get_current_user)):
     return list_user_chats(current_user["user_id"])
+
 
 @app.get("/api/chat_history/{chat_id}")
 def api_chat_history(chat_id: str, current_user: dict = Depends(get_current_user)):
     user_id = current_user["user_id"]
     chat_doc = get_chat_history(chat_id, user_id)
-
     if not chat_doc:
         raise HTTPException(status_code=404, detail="Chat not found")
-
     return chat_doc
+
 
 @app.delete("/api/delete_chat/{chat_id}")
 def delete_chat(chat_id: str, current_user: dict = Depends(get_current_user)):
@@ -291,26 +286,20 @@ def delete_chat(chat_id: str, current_user: dict = Depends(get_current_user)):
         "chat_id": chat_id,
         "user_id": current_user["user_id"]
     })
-
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Chat not found")
+    return {"status": "success", "message": "Chat deleted successfully"}
 
-    return {
-        "status": "success",
-        "message": "Chat deleted successfully"
-    }
 
 @app.get("/api/health")
 def health_check():
     try:
         client.admin.command("ping")
-        return {
-            "status": "ok",
-            "db": "connected"
-        }
+        return {"status": "ok", "db": "connected"}
     except Exception:
         logger.exception("Database health check failed")
         raise HTTPException(status_code=503, detail="Database unavailable")
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))

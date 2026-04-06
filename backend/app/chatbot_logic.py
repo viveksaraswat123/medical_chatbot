@@ -1,4 +1,5 @@
 import os
+import re
 import logging
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
@@ -6,26 +7,19 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from .vector_store import get_retriever
 
-#logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# 
-# Startup validation
-# 
 if not os.getenv("GROQ_API_KEY"):
     raise EnvironmentError(
         "GROQ_API_KEY is not set. Please configure it in your environment variables."
     )
 
- 
-# Module-level singletons  (initialised once, reused on every request)
 _retriever = None
 _llm = None
-
+_chain = None
 
 def _get_retriever():
-    """Lazily initialise and cache the vector-store retriever."""
     global _retriever
     if _retriever is None:
         logger.info("Initialising retriever...")
@@ -34,7 +28,6 @@ def _get_retriever():
 
 
 def _get_llm() -> ChatGroq:
-    """Lazily initialise and cache the Groq LLM client."""
     global _llm
     if _llm is None:
         logger.info("Initialising LLM...")
@@ -44,8 +37,7 @@ def _get_llm() -> ChatGroq:
             groq_api_key=os.getenv("GROQ_API_KEY"),
         )
     return _llm
- 
-# Prompt template
+
 
 MEDIBOT_TEMPLATE = """
 You are MediBot — a medical-domain AI assistant.
@@ -122,17 +114,30 @@ USER QUESTION:
 ANSWER:
 """
 
- 
-# Helpers 
+_NON_MEDICAL_PATTERN = re.compile(
+    r"^\s*(good|hi+|hello|hey|thanks?|thank you|ok(ay)?|cool|nice|great|"
+    r"lol|haha|hehe|bye|goodbye|test|yo|sup|wassup|howdy|cheers|"
+    r"awesome|wow|bravo|well done|congrats?)\W*$",
+    re.IGNORECASE,
+)
+
+NON_MEDICAL_REPLY = (
+    "I cannot answer non-medical questions. "
+    "I only respond to medically relevant queries."
+)
+
+
+def _is_non_medical(text: str) -> bool:
+    return bool(_NON_MEDICAL_PATTERN.match(text))
+
+
 def _format_docs(docs) -> str:
-    """Concatenate retrieved document chunks into a single context string."""
     if not docs:
         return "No relevant context found."
     return "\n\n".join(doc.page_content for doc in docs)
 
 
 def _sanitise_input(text: str) -> str:
-    """Strip whitespace and enforce a reasonable length limit."""
     text = text.strip()
     if len(text) > 2000:
         text = text[:2000]
@@ -140,13 +145,12 @@ def _sanitise_input(text: str) -> str:
 
 
 def _build_chain(retriever, llm):
-    """Assemble the RAG chain."""
     prompt = ChatPromptTemplate.from_template(MEDIBOT_TEMPLATE)
     return (
         {
-            "context": retriever | _format_docs,
-            "history": lambda _: "",          # filled per-call via partial below
-            "question": RunnablePassthrough(),
+            "context":  (lambda x: x["question"]) | retriever | _format_docs,
+            "history":  lambda x: x["history"],
+            "question": lambda x: x["question"],
         }
         | prompt
         | llm
@@ -154,58 +158,33 @@ def _build_chain(retriever, llm):
     )
 
 
-# 
-# Public API
-# 
+def _get_chain():
+    global _chain
+    if _chain is None:
+        logger.info("Building RAG chain...")
+        _chain = _build_chain(_get_retriever(), _get_llm())
+    return _chain
+
 
 def get_chatbot_response(
     conversation_id: str,
     user_query: str,
     chat_history: str = "",
 ) -> str:
-    """
-    Return MediBot's answer for *user_query*.
-
-    Parameters
-    ----------
-    conversation_id : str
-        Identifier for the current conversation session (used for logging /
-        future history persistence).
-    user_query : str
-        The latest message from the user.
-    chat_history : str
-        Formatted string of prior turns to inject as context.
-    """
-
     user_query = _sanitise_input(user_query)
     if not user_query:
         return "Please enter a valid question."
 
+    if _is_non_medical(user_query):
+        logger.info("conversation_id=%s | non-medical input blocked: %r", conversation_id, user_query)
+        return NON_MEDICAL_REPLY
+
     logger.info("conversation_id=%s | query_length=%d", conversation_id, len(user_query))
 
-
-    retriever = _get_retriever()
-    llm = _get_llm()
-
-
-    prompt = ChatPromptTemplate.from_template(MEDIBOT_TEMPLATE)
-
-    chain = (
-        {
-            "context": retriever | _format_docs,
-            "history": lambda _: chat_history,
-            "question": RunnablePassthrough(),
-        }
-        | prompt
-        | llm
-        | StrOutputParser()
-    )
-
-    #invoke with error handling
     try:
-        response = chain.invoke(user_query)
+        response = _get_chain().invoke({"question": user_query, "history": chat_history})
         return response
-    except Exception as exc:
+    except Exception:
         logger.exception("LLM chain failed for conversation_id=%s", conversation_id)
         return (
             "I'm sorry, I encountered an error while processing your request. "
@@ -214,11 +193,6 @@ def get_chatbot_response(
 
 
 def generate_chat_title(first_message: str) -> str:
-    """
-    Generate a short chat title (≤ 6 words) from the user's first message.
-
-    Reuses the cached LLM instance instead of creating a new one.
-    """
     first_message = _sanitise_input(first_message)
     if not first_message:
         return "New Medical Chat"
@@ -234,9 +208,8 @@ def generate_chat_title(first_message: str) -> str:
     )
 
     try:
-        llm = _get_llm()
-        title = llm.invoke(title_prompt).content.strip().replace("\n", "")
+        title = _get_llm().invoke(title_prompt).content.strip().replace("\n", "")
         return title if title else "Medical Query"
-    except Exception as exc:
+    except Exception:
         logger.exception("Title generation failed")
         return "Medical Query"
