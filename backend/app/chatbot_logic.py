@@ -79,7 +79,7 @@ high risk trauma, sudden vision loss,
 
 Respond ONLY:
 
-"⚠️ This may be a medical emergency. Seek immediate medical help or call emergency services."
+" This may be a medical emergency. Seek immediate medical help or call emergency services."
 
 No additional explanation.
 
