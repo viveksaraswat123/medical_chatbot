@@ -104,7 +104,7 @@ if os.path.exists(static_dir):
 
 @app.on_event("startup")
 def preload_rag():
-    from app.chatbot_logic import _get_chain
+    from .chatbot_logic import _get_chain
     threading.Thread(target=_get_chain).start()
 
 @app.get("/", include_in_schema=False)
