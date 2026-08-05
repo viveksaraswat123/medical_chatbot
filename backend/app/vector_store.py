@@ -9,6 +9,11 @@ VECTOR_STORE_PATH = os.getenv(
     os.path.abspath(os.path.join(BASE_DIR, "..", "vector_store_db"))
 )
 
+HF_CACHE_DIR = os.getenv(
+    "HF_CACHE_DIR",
+    os.path.abspath(os.path.join(BASE_DIR, "..", "hf_cache"))
+)
+
 _embeddings = None
 _retriever = None
 
@@ -19,7 +24,7 @@ def _get_embeddings():
     if _embeddings is None:
         _embeddings = HuggingFaceEmbeddings(
             model_name="BAAI/bge-small-en-v1.5",
-            cache_folder="./hf_cache",
+            cache_folder=HF_CACHE_DIR,
             encode_kwargs={"normalize_embeddings": True}
         )
 
