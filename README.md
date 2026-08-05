@@ -1,89 +1,89 @@
-# Medibot — AI Medical Assistant
+# Medibot
 
-A RAG-based medical chatbot built to explore how retrieval-augmented generation works in practice. You ask a health question, it searches a custom medical knowledge base first, then generates a response — instead of relying purely on what the LLM already knows.
+A medical Q&A chatbot that answers from a retrieval-augmented pipeline instead of a raw LLM prompt. I built it mainly to actually understand RAG — chunking, embeddings, vector search, grounding a generation step — rather than just reading about it.
 
-Built with FastAPI, LangChain, FAISS, and Groq.
+**Live demo:** https://medical-chatbot-new-978r.onrender.com
+*(hosted on Render's free tier, so the first request after idle can take 30-50s to spin up - that's a cold start, not a bug)*
 
-**Live:** https://medical-chatbot-new-978r.onrender.com
-
-Screenshot: ![alt text](<Screenshot (345).png>) ![alt text](<Screenshot (339).png>) ![alt text](<Screenshot (341).png>) ![alt text](<Screenshot (342).png>)
-
----
-
-## What it does
-
-- Answers health-related questions using a custom knowledge base (not just generic LLM responses)
-- Maintains full chat history per user with multiple conversation sessions
-- User authentication with JWT (signup, login, protected routes)
-- AI-generated chat titles based on your first message
-- Clean frontend — no React, just HTML/CSS/JS
+![Chat interface](<Screenshot (345).png>)
+![Login](<Screenshot (339).png>)
+![Signup](<Screenshot (341).png>)
+![Chat history](<Screenshot (342).png>)
 
 ---
 
-## Tech Stack
+## Why RAG instead of just calling the LLM
 
-| Layer | Tech |
-|---|---|
-| Backend | FastAPI, Python 3.11 |
-| Database | MongoDB (users + chat history) |
-| Auth | JWT (python-jose) |
-| RAG Pipeline | LangChain + FAISS |
-| Embeddings | HuggingFace `BAAI/bge-base-en-v1.5` |
-| LLM | Groq API — Llama 3.3 70B |
-| Deployment | Render |
+Ask Llama 3.3 directly about a specific condition and it'll answer from whatever it memorized during training — no source, no way to check it, and it'll happily hallucinate details in a confident tone. Medibot instead:
+
+1. Splits a medical knowledge base into chunks
+2. Embeds them and stores them in a local FAISS index
+3. On a new question, retrieves the top-3 most relevant chunks
+4. Feeds those chunks + the question to the LLM as context, and asks it to answer *from that*
+
+It's still not a doctor and still not perfect — retrieval quality caps how good the answer can be, and a bad chunk boundary can cut a fact in half. But answers are at least traceable back to something in the knowledge base instead of being pure recall.
 
 ---
 
-## Project Structure
+## Stack
+
+| Layer | Choice | Why |
+|---|---|---|
+| Backend | FastAPI | async support, fast to iterate on |
+| RAG | LangChain + FAISS | FAISS runs locally, no vector DB hosting cost |
+| Embeddings | `BAAI/bge-base-en-v1.5` (HuggingFace) | solid mid-size model, runs fine on CPU |
+| LLM | Groq — Llama 3.3 70B | free tier + very fast inference |
+| Auth | JWT (python-jose) | stateless, no session store needed |
+| DB | MongoDB | users + per-session chat history |
+| Frontend | plain HTML/CSS/JS | didn't want a build step for a project this size |
+| Hosting | Render | free tier, deploys straight from GitHub |
+
+---
+
+## What it actually does
+
+- Answers questions grounded in a custom medical knowledge base
+- Signup/login with JWT-protected routes
+- Multiple chat sessions per user, each with full history saved to MongoDB
+- Auto-generates a short title for each chat from the first message
+- Rate limiting and email validation on the auth endpoints
+
+---
+
+## Project layout
 
 ```
 medical_chatbot/
 ├── backend/
 │   ├── app/
-│   │   ├── main.py           # FastAPI app, routes
-│   │   ├── auth.py           # Signup, login, JWT
-│   │   ├── chatbot_logic.py  # RAG chain, LLM calls
-│   │   ├── chat_storage.py   # MongoDB chat operations
-│   │   ├── vector_store.py   # FAISS setup, retriever
-│   │   ├── db.py             # MongoDB connection
-│   │   └── utils.py
-│   ├── knowledge_base/       # .txt files used to build the vector store
-│   ├── vector_store_db/      # FAISS index (pre-built)
+│   │   ├── main.py            # FastAPI routes
+│   │   ├── auth.py            # signup, login, JWT
+│   │   ├── chatbot_logic.py   # RAG chain + LLM calls
+│   │   ├── chat_storage.py    # Mongo chat CRUD
+│   │   ├── vector_store.py    # FAISS index build/load
+│   │   └── db.py
+│   ├── knowledge_base/        # source .txt files
+│   ├── vector_store_db/       # pre-built FAISS index
 │   └── requirements.txt
 ├── frontend/
-│   ├── index.html
-│   ├── login_page.html
-│   ├── signup.html
-│   ├── chat.html
-│   └── static/
-│       └── auth.js
+│   ├── index.html / login_page.html / signup.html / chat.html
+│   └── static/auth.js
 └── render.yaml
 ```
 
 ---
 
-## Running Locally
+## Running it locally
 
-**1. Clone the repo**
 ```bash
 git clone https://github.com/viveksaraswat123/medical_chatbot
 cd medical_chatbot
-```
-
-**2. Create a virtual environment**
-```bash
-python -m venv myenv
-source myenv/bin/activate  # Windows: myenv\Scripts\activate
-```
-
-**3. Install dependencies**
-```bash
+python -m venv myenv && source myenv/bin/activate   # Windows: myenv\Scripts\activate
 pip install -r backend/requirements.txt
 ```
 
-**4. Set up environment variables**
+Create `backend/.env`:
 
-Create a `.env` file inside the `backend/` folder:
 ```
 GROQ_API_KEY=your_groq_api_key
 MONGO_URI=your_mongodb_connection_string
@@ -93,56 +93,50 @@ LOG_LEVEL=INFO
 LOG_FILE=logs/medibot.log
 ```
 
-**5. Build the vector store** (only needed once)
+Build the FAISS index (only needed once, or after changing the knowledge base):
+
 ```bash
-cd backend
-python -m app.vector_store
+cd backend && python -m app.vector_store
 ```
 
-**6. Start the server**
+Run the server from the project root:
+
 ```bash
-cd ..  # back to project root
 PYTHONPATH=. uvicorn backend.app.main:app --reload
 ```
 
-App runs at `http://localhost:8000`
+→ `http://localhost:8000`
 
 ---
 
-## How the RAG pipeline works
+## Deploying on Render
 
-1. Medical text files in `knowledge_base/` are split into chunks
-2. Each chunk is converted to a vector using HuggingFace embeddings
-3. Vectors are stored in a FAISS index locally
-4. When a user asks a question, the top 3 most relevant chunks are retrieved
-5. Those chunks + the question are passed to the LLM as context
-6. Groq (Llama 3.3 70B) generates the final response
+`render.yaml` at the root has the full config. A couple of things that weren't obvious until they broke the build:
 
-This means the bot answers from actual medical content, not just from what the LLM was trained on.
+- Pin `pythonVersion` to `3.11.x` — LangChain doesn't play well with newer Python on Render's image
+- `vector_store_db/` has to be committed to the repo; Render doesn't build it at deploy time
+- Log to `/tmp/` on Render, not `logs/` — the filesystem outside `/tmp` is read-only
 
 ---
 
-## Deployment (Render)
+## Known limitations
 
-The `render.yaml` at the root handles the full deployment config. A few things worth noting if you're deploying this yourself:
-
-- Pin Python to `3.11.x` — LangChain breaks on 3.14
-- Set `PYTHONPATH=.` in the start command
-- Use `/tmp/` for log files on cloud servers
-- The `vector_store_db/` folder must be committed to your repo — Render won't build it
+- Retrieval is top-k similarity search, no re-ranking — good enough for a demo, not production-grade
+- Knowledge base is a small set of curated text files, not a live medical corpus
+- Free-tier Render + free-tier Groq means occasional cold starts and rate limits
 
 ---
 
 ## Disclaimer
 
-This is a personal project built to learn RAG and AI integration. It is not a substitute for professional medical advice. Always consult a real doctor for anything health-related.
+Built for learning RAG and backend integration end to end. Not medical advice — see an actual doctor.
 
 ---
 
 ## Author
 
 **Vivek Saraswat**
-Final year B.Tech CS - ABES Institute of Technology, Noida
+Final year B.Tech CSE, ABES Institute of Technology, Noida
 Interning at Webmobril Technologies
 
 [LinkedIn](https://www.linkedin.com/in/saraswat-vivek) · [GitHub](https://github.com/viveksaraswat123)
