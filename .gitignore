@@ -1,4 +1,16 @@
-/my_env
+myenv/
+my_env/
+.venv/
+venv/
+
 backend/.env
 *.env
 .env
+
+__pycache__/
+*.pyc
+
+logs/
+*.log
+
+.railway/
